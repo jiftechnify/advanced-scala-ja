@@ -68,7 +68,7 @@ object JsonWriterInstances {
 
 インターフェイスを定義するための最も単純な方法は、シングルトンオブジェクトの中にメソッドを配置するという方法だ:
 
-```scala
+```tut:book:silent
 object Json {
   def toJson[A](value: A)(implicit w: JsonWriter[A]): Json =
     w.write(value)
@@ -77,17 +77,17 @@ object Json {
 
 このオブジェクトを利用するには、関心のある型クラスのインスタンスをインポートし、適切なメソッドを呼び出す:
 
-```scala
+```tut:book:silent
 import JsonWriterInstances._
 ```
 
-```scala
+```tut:book
 Json.toJson(Person("Dave", "dave@example.com"))
 ```
 
 コンパイラは、暗黙のパラメータが与えられていない`toJson` メソッドの呼び出しを検出すると、適切な型を持つ型クラスのインスタンスを探してメソッド呼び出しに挿入する。
 
-```scala
+```tut:book:silent
 Json.toJson(Person("Dave", "dave@example.com"))(personWriter)
 ```
 
@@ -98,7 +98,7 @@ Cats では、これを型クラスの **構文(syntax)** と呼ぶ:
 
 [^pimping]: 拡張メソッドは「型の強化(type enrichment)」や「改造(pimping)」と呼ばれる場合もあるが、これらの用語は今では死語となっている。
 
-```scala
+```tut:book:silent
 object JsonSyntax {
   implicit class JsonWriterOps[A](value: A) {
     def toJson(implicit w: JsonWriter[A]): Json =
@@ -109,18 +109,18 @@ object JsonSyntax {
 
 これを必要な型のインスタンスと一緒にインポートすることで、インターフェイス構文を利用できるようになる:
 
-```scala
+```tut:book:silent
 import JsonWriterInstances._
 import JsonSyntax._
 ```
 
-```scala
+```tut:book:silent
 Person("Dave", "dave@example.com").toJson
 ```
 
 この場合も、コンパイラは暗黙のパラメータに与える値の候補を探し、補完してくれる:
 
-```scala
+```tut:book
 Person("Dave", "dave@example.com").toJson(personWriter)
 ```
 
@@ -129,7 +129,7 @@ Person("Dave", "dave@example.com").toJson(personWriter)
 Scala 標準ライブラリには `implicitly` と呼ばれるジェネリックな型クラスインターフェイスが用意されている。
 その定義はとてもシンプルだ:
 
-```scala
+```tut:book:silent
 def implicitly[A](implicit value: A): A =
   value
 ```
