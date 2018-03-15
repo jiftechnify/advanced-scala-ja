@@ -28,13 +28,13 @@ secPrefixTemplate: "$$i$$"
 pages:
   - intro/preface.md
   - intro/versions.md
-  # - intro/conventions.md
-  # - intro/contributors.md
-  # - intro/backers.md
-  #
-  # - parts/part1.md
-  #
-  # - type-classes/index.md
+  - intro/conventions.md
+  - intro/contributors.md
+  - intro/backers.md
+
+  - parts/part1.md
+
+  - type-classes/index.md
   # - type-classes/anatomy.md
   # - type-classes/implicits.md
   # - type-classes/printable.md
