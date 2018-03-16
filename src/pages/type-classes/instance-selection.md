@@ -12,7 +12,7 @@
 
 ### 変性(variance) {#sec:variance}
 
-型クラスを定義する際にその型パラメータに変位指定を加えることで、型クラスの変性や、暗黙値の解決においてコンパイラがどのインスタンスを選択できるかということを指定できる。
+型クラスを定義する際にその型パラメータに変位指定(variance annotation)を加えることで、型クラスの変性や、暗黙値の解決においてコンパイラがどのインスタンスを選択できるかということを指定できる。
 
 Essential Scala の復習になるが、変性はサブ型に関係する。
 型`A`の値が期待されている場所すべてにおいて型`B`の値を代わりに利用できるとき、`B`は`A`のサブ型であるという。
@@ -37,7 +37,7 @@ trait Option[+A]
 Scala コレクションは共変なので、ある型のコレクションを他の型のコレクションに代入できる。
 例えば、`Circle`は`Shape`のサブ型なので、`List[Shape]`が期待されている場所ならばどこでも、`List[Circle]`を使うことができる:
 
-```scala
+```tut:book:silent
 sealed trait Shape
 case class Circle(radius: Double) extends Shape
 ```
@@ -47,7 +47,7 @@ val ciecles: List[Circle] = ???
 val shapes: List[Shape] = circles
 ```
 
-```scala
+```tut:book:invisible
 val circles: List[Circle] = null
 val shapes: List[Shape] = circles
 ```
@@ -61,14 +61,14 @@ trait F[-A]
 
 **反変**
 
-紛らわしいことに、反変性とは`A`が`B`のサブ型であるときに`F[A]`が`F[B]`のサブ型であるという性質である。
+混乱しやすいのだが、反変性とは`A`が`B`のサブ型であるときに`F[A]`が`F[B]`のサブ型であるという性質である。
 これは、先程の`JsonWriter`型クラスのような、加工処理をモデリングするのに役立つ:
 
-```scala
+```tut:book:invisible
 trait Json
 ```
 
-```scala
+```tut:book
 trait JsonWriter[-A] {
   def write(value: A): Json
 }
@@ -94,7 +94,7 @@ val shapeWriter: JsonWriter[Shape] = null
 val circleWriter: JsonWriter[Circle] = null
 ```
 
-```scala
+```tut:book:silent
 def format[A](value: A, writer: JsonWriter[A]): Json =
   writer.write(value)
 ```
@@ -125,10 +125,10 @@ Scala の型コンストラクタの意味論では、非変がデフォルト�
 よく陥りやすい、2つの問題がある。
 次のような代数的データ型があるとしよう:
 
-```scala
+```tut:book:silent
 sealed trait A
-final case class B extends A
-final case class C extends A
+final case object B extends A
+final case object C extends A
 ```
 
 ここで次のような疑問が生じる:

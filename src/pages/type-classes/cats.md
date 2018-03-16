@@ -23,13 +23,13 @@ trait Show[A] {
 Cats の型クラスは[`cats`][cats.package]パッケージに定義されている。
 このパッケージから`Show`を直接インポートできる:
 
-```scala
+```tut:book:silent
 import cats.Show
 ```
 
 Cats における型クラスそれぞれに対応するコンパニオンオブジェクトは、指定した任意の型に対するインスタンスを探しだす`apply`メソッドを持つ:
 
-```scala
+```tut:book:fail
 val showInt = Show.apply[Int]
 ```
 
@@ -52,7 +52,7 @@ val showInt = Show.apply[Int]
 
 それでは、`Int`と`String`に対する`Show`のインスタンスをインポートしてみよう:
 
-```scala
+```tut:book:silent
 import cats.instances.int._    // for Show
 import cats.instances.string._ // for Show
 
@@ -62,7 +62,7 @@ val showString: Show[String] = Show.apply[String]
 
 良くなった! これで、`Show`の2つのインスタンスにアクセスして、`Int`や`String`を出力するのに使えるようになった:
 
-```scala
+```tut:book
 val intAsString: String =
   showInt.show(123)
 
@@ -75,11 +75,11 @@ val stringAsString: String =
 [`cats.syntax.show`][cats.syntax.show]から **インターフェイス構文** をインポートすれば、`Show`をもっと楽に利用できるようになる。
 これはスコープ内に`Show`のインスタンスが存在するすべての型に対し、`show`という拡張メソッドを追加する:
 
-```scala
+```tut:book:silent
 import cats.syntax.show._ // for Show
 ```
 
-```scala
+```tut:book
 val shownInt = 123.show
 
 val shownString = "abc".show
@@ -104,7 +104,7 @@ Cats はそれぞれの型クラスに対して別々の構文インポートを
 
 多くの開発者は、はじめにファイルの先頭に次のようなインポートを書き、名前の衝突や曖昧なインポートの問題が起きたときにより限定的なインポートに書き直す:
 
-```scala
+```tut:book:silent
 import cats._
 import cats.implicits._
 ```
@@ -113,7 +113,7 @@ import cats.implicits._
 
 `Show`のインスタンスを定義するには、所望の型に対応するトレイトを実装するだけでいい:
 
-```scala
+```tut:book:silent
 import java.util.Date
 
 implicit val dateShow: Show[Date] =
@@ -140,7 +140,7 @@ object Show {
 
 これらのメソッドを使えば、何もないところからインスタンスを定義する場合よりも簡単に、素早くインスタンスを構築できる:
 
-```scala
+```tut:book:silent
 implicit val dateShow: Show[Date] =
   Show.show(date => s"${date.getTime}ms since the epoch.")
 ```
@@ -155,7 +155,7 @@ Cats の多くの型クラスは、以上のようなインスタンスを構築
 <div class="solution">
 まず、Cats から必要なすべてのもの(`Show`型クラス、`Int`と`String`に対するインスタンス、そしてインターフェイス構文)をインポートしよう:
 
-```scala
+```tut:book:silent
 import cats.Show
 import cats.instances.int._    // for Show
 import cats.instances.string._ // for Show
@@ -164,13 +164,13 @@ import cats.syntax.show._      // for Show
 
 `Cat`の定義はそのままでよい:
 
-```scala
+```tut:book:silent
 final case class Cat(name: String, age: Int, color: String)
 ```
 
 コンパニオンオブジェクトの`Printable`を、前節で見た定義ヘルパーの1つを利用した`Show`のインスタンスに書き換える:
 
-```scala
+```tut:book:silent
 implicit val catShow = Show.show[Cat] { cat =>
   val name  = cat.name.show
   val age   = cat.age.show
@@ -181,7 +181,7 @@ implicit val catShow = Show.show[Cat] { cat =>
 
 最後に、`Show`のインターフェイス構文を利用して`Cat`のインスタンスを出力する:
 
-```scala
+```tut:book
 println(Cat("Garfield", 38, "ginger and black").show)
 ```
 </div>
