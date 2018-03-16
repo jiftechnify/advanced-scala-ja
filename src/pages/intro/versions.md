@@ -36,5 +36,5 @@ $ sbt new underscoreio/cats-seed.g8
 $ sbt new typelevel/sbt-catalysts.g8
 ```
 
-これは一通りの依存ライブラリやコンパイラプラグインと一緒に、単体テストと [tutを利用した][link-tut] ドキュメントのためのテンプレートを生成する。
+これは一通りの依存ライブラリやコンパイラプラグインを取り込むと同時に、単体テストと [tutを利用した][link-tut] ドキュメントのためのテンプレートを生成する。
 詳しくは、[catalysts][link-catalysts]と[sbt-catalysts][link-sbt-catalysts]のプロジェクトページを参照のこと。
