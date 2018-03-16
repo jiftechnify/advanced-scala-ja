@@ -41,7 +41,7 @@ pages:
   - type-classes/cats.md
   - type-classes/equal.md
   - type-classes/instance-selection.md
-  # - type-classes/summary.md
+  - type-classes/summary.md
   #
   # - monoids/index.md
   # - monoids/cats.md
