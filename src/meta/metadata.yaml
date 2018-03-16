@@ -43,7 +43,7 @@ pages:
   # - type-classes/instance-selection.md
   # - type-classes/summary.md
   #
-  # - monoids/index.md
+  - monoids/index.md
   # - monoids/cats.md
   # - monoids/applications.md
   # - monoids/summary.md
