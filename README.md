@@ -1,9 +1,45 @@
 # Scala with Cats in Japanese
-["Scala with Cats"](https://github.com/underscoreio/advanced-scala)の和訳 :cat::jp: (Japanese translation of the book "Scala with Cats")
+["Scala with Cats"](https://github.com/underscoreio/advanced-scala)の(非公式)和訳 :cat::jp: (Japanese translation of the book "Scala with Cats")
 
-以下オリジナルのREADME
+著: [Noel Welsh](http://twitter.com/noelwelsh) / [Dave Gurnell](http://twitter.com/davegurnell)
+
+訳: Takumi Fujiwara([@jiftechnify](https://github.com/jiftechnify))
+
+挿絵: [Jenny Clements](http://patreon.com/miasandelle)
+
+出版: [Underscore Consulting LLP](http://underscore.io)
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />この著作物は<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>のもとで頒布されています。
+
+## 概要
+
+[Scala with Cats][scala-with-cats]は、[Cats](http://typelevel.org/cats)ライブラリと多くの実例を用いて、モノイド・ファンクタ・モナド・アプリカティブファンクタといった、関数プログラミングにおける抽象化手法について解説した書籍である。
+
+## ビルド
+
+Scala with Catsでは、[Underscoreの電子書籍ビルドシステム][ebook-template]を利用している。
+
+この本をビルドする最も簡単な方法は、[Docker Compose](http://docker.com)を使う方法だ:
+
+- Docker Composeをインストール(OS Xなら`brew install docker-compose`。そうでなければ[docker.com](http://docker.com)からダウンロード)し、
+
+- `go.sh`を実行する(`go.sh`が動かなければ、代わりに`docker-compose run book bash`を実行)。
+
+これで、この本をビルドするのに必要なすべての依存ライブラリを含んだDockerコンテナの中で、`bash`シェルが起動した状態になる。
+次に、シェルから次のコマンドを順に実行する:
+
+- `npm install`
+- `sbt`
+
+`sbt`の中で`pdf`、`html`、`epub`、または`all`コマンドを実行すれば、所望の形式の本がビルドされる。
+出力は`dist`ディレクトリに配置される。
+
+## Contributing
+
+TBD
 
 ***
+(以下、原著のREADME)
 
 # Scala with Cats
 
