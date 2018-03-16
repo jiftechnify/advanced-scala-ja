@@ -38,7 +38,7 @@ pages:
   - type-classes/anatomy.md
   - type-classes/implicits.md
   - type-classes/printable.md
-  # - type-classes/cats.md
+  - type-classes/cats.md
   # - type-classes/equal.md
   # - type-classes/instance-selection.md
   # - type-classes/summary.md
