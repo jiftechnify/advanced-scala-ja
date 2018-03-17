@@ -22,7 +22,7 @@ List(1, 2, 3).map(n => n + 1)
 同じ原則が`Either`の`Left`と`Right`という文脈についても当てはまる。
 図[@fig:functors:list-option-either-type-chart]に示した型シグネチャの共通パターンに沿った、変換に関する一般的な考え方が、異なるデータ型の間の`map`の振る舞いを1つに結びつける。
 
-![型チャート: List、Option、Eitherにおけるmap(src/pages/functors/list-option-either-map.pdf+svg){#fig:functors:list-option-either-type-chart}
+![型チャート: List、Option、Eitherにおけるmap](src/pages/functors/list-option-either-map.pdf+svg){#fig:functors:list-option-either-type-chart}
 
 `map`は文脈をそのまま残すので、あるデータ構造の要素に対する複数の計算を繋げるために、`map`を繰り返し呼び出すことができる:
 
@@ -51,7 +51,7 @@ List(1, 2, 3).
 `Future`の`map`メソッドの型シグネチャは、図[@fig:functors:future-type-chart]が示すとおり、上で挙げたものと同じ形をしている。
 しかし、その振る舞いは全く異なる。
 
-![型チャート: Futureにおけるmap](src/pages/functor/future-map.pdf+svg){#fig:functors:future:type:chart}
+![型チャート: Futureにおけるmap](src/pages/functors/future-map.pdf+svg){#fig:functors:future:type:chart}
 
 `Future`を扱う際は、その内部状態には何の保証もない。
 包まれた計算は実行中かもしれないし、完了しているかもしれないし、はたまた中断されているかもしれない。
@@ -223,7 +223,7 @@ package cats
 ```
 
 ```tut:book:silent
-import scala.langage.higherKinds
+import scala.language.higherKinds
 
 trait Functor[F[_]] {
   def map[A, B](fa: F[A])(f: A => B): F[B]
