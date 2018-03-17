@@ -319,5 +319,5 @@ scalacOptions += "-language:higherKinds"
 ```
 
 本書では、可能な限り明示的に language インポートを利用する。
-実用上は、`scalaOptions`フラグを用いたほうがシンプルで、冗長にならないといえる。
+実用上は、`scalaOptions`フラグを用いたほうがシンプルで、冗長さを軽減できるだろう。
 </div>
