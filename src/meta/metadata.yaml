@@ -45,7 +45,7 @@ pages:
   #
   - monoids/index.md
   - monoids/cats.md
-  # - monoids/applications.md
+  - monoids/applications.md
   # - monoids/summary.md
   #
   # - functors/index.md
