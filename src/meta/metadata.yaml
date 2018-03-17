@@ -44,7 +44,7 @@ pages:
   # - type-classes/summary.md
   #
   - monoids/index.md
-  # - monoids/cats.md
+  - monoids/cats.md
   # - monoids/applications.md
   # - monoids/summary.md
   #
