@@ -50,7 +50,7 @@ pages:
   #
   - functors/index.md
   - functors/cats.md
-  # - functors/contravariant-invariant.md
+  - functors/contravariant-invariant.md
   # - functors/contravariant-invariant-cats.md
   # - functors/partial-unification.md
   # - functors/summary.md
