@@ -187,7 +187,7 @@ func(123)
 ```
 
 <div class="callout callout-warning">
-**部分単一化(partial unification)**
+**部分的単一化(partial unification)**
 
 上の例を動作させるには、次のようなコンパイラオプションを`build.sbt`に追加する必要がある:
 
