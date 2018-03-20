@@ -55,7 +55,7 @@ pages:
   # - functors/partial-unification.md
   # - functors/summary.md
   #
-  # - monads/index.md
+  - monads/index.md
   # - monads/cats.md
   # - monads/id.md
   # - monads/either.md
