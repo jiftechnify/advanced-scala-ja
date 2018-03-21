@@ -57,7 +57,7 @@ pages:
   #
   - monads/index.md
   - monads/cats.md
-  # - monads/id.md
+  - monads/id.md
   # - monads/either.md
   # - monads/monad-error.md
   # - monads/eval.md
