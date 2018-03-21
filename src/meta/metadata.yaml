@@ -56,7 +56,7 @@ pages:
   # - functors/summary.md
   #
   - monads/index.md
-  # - monads/cats.md
+  - monads/cats.md
   # - monads/id.md
   # - monads/either.md
   # - monads/monad-error.md
