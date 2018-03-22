@@ -13,3 +13,9 @@
 > This type class is one of the benefits bought to us by Cats.
 
 - "bought"は"brought"のtypoでは?
+
+
+### monad-error
+> l155.
+
+- 演習を作ろうとした形跡があるが、問題文がない

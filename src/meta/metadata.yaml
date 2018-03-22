@@ -59,7 +59,7 @@ pages:
   - monads/cats.md
   - monads/id.md
   - monads/either.md
-  # - monads/monad-error.md
+  - monads/monad-error.md
   # - monads/eval.md
   # - monads/writer.md
   # - monads/reader.md
