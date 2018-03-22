@@ -61,7 +61,7 @@ pages:
   - monads/either.md
   - monads/monad-error.md
   - monads/eval.md
-  # - monads/writer.md
+  - monads/writer.md
   # - monads/reader.md
   # - monads/state.md
   # - monads/custom-instances.md
