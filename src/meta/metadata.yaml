@@ -68,7 +68,7 @@ pages:
   # - monads/summary.md
   #
   - monad-transformers/index.md
-  # - monad-transformers/summary.md
+  - monad-transformers/summary.md
   #
   # - applicatives/index.md
   # - applicatives/semigroupal.md
