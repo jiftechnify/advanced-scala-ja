@@ -38,7 +38,7 @@ catName.run(Cat("Garfield", "lasagne"))
 
 ```tut:book:silent
 val greetKitty: Reader[Cat, String] =
-  catName.map(name => s"Hello ${name})
+  catName.map(name => s"Hello ${name}")
 ```
 
 ```tut:book

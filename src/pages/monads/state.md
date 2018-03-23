@@ -15,7 +15,7 @@ import cats.data.State
 
 ```tut:book
 val a = State[Int, String] { state =>
-  (state, s"The state is $state)
+  (state, s"The state is $state")
 }
 ```
 

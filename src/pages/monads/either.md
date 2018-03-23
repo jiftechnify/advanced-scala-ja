@@ -166,7 +166,7 @@ import cats.syntax.either._
 
 最後に、Cats は`toOption`、`toList`、`toTry`、`toValidated`など、多数の変換メソッドを追加している。
 
-## エラー処理
+### エラー処理
 
 `Either`の典型的な利用用途は、フェイルファストなエラー処理の実装である。
 いつものように、`flatMap`を使って計算を連鎖させる。
@@ -201,10 +201,10 @@ object wrapper {
   final case class UserNotFound(username: String)
     extends LoginError
 
-  final case classs PasswordIncorrect(username: String)
+  final case class PasswordIncorrect(username: String)
     extends LoginError
 
-  case object UnexpectedError extends LogoinError
+  case object UnexpectedError extends LoginError
 }; import wrapper._
 ```
 
@@ -220,13 +220,13 @@ type LoginResult = Either[LoginError, User]
 
 ```tut:book:silent
 // 型に基づいてエラー処理の振る舞いを選択する
-def handleError(error: LogoinError): Unit =
+def handleError(error: LoginError): Unit =
   error match {
     case UserNotFound(u) =>
-      println(s"User not found: $u)
+      println(s"User not found: $u")
 
     case PasswordIncorrect(u) =>
-      println(s"Password incorrect: $u)
+      println(s"Password incorrect: $u")
 
     case UnexpectedError =>
       println(s"Unexpected error")

@@ -255,7 +255,7 @@ def factorial(n: Int): Logged[Int] =
            } else {
              slowly(factorial(n - 1).map(_ * n))
            }
-    _   <- Vector(s"fact $n $ans).tell
+    _   <- Vector(s"fact $n $ans").tell
   } yield ans
 ```
 
