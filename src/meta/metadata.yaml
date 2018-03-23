@@ -65,7 +65,7 @@ pages:
   - monads/reader.md
   - monads/state.md
   - monads/custom-instances.md
-  # - monads/summary.md
+  - monads/summary.md
   #
   # - monad-transformers/index.md
   # - monad-transformers/summary.md
