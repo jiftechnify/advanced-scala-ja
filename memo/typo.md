@@ -24,3 +24,9 @@
 > l280.
 
 - `Semigroup`で十分だし本文でも`Semigroup`となっているが、コメントが`for Monoid`
+
+### state
+> l159.
+> For example, we can evaluate `(1 + 2) * 3)` as follows:
+
+- 最後の括弧が余計
