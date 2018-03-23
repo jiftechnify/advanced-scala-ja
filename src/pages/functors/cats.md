@@ -158,7 +158,7 @@ Fucutor[Future](futureFunctor)
 Functor[Future](futureFunctor(executionContext))
 ```
 
-### 演習: 分岐するファンクタ
+### 演習: ファンクタで分岐
 
 以下の二分木データ型に対する`Functor`を実装せよ。
 `Branch`と`Leaf`に対してコードが期待通りに動作することを確認せよ:
