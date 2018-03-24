@@ -77,7 +77,7 @@ pages:
   # - applicatives/applicative.md
   # - applicatives/summary.md
   #
-  # - foldable-traverse/index.md
+  - foldable-traverse/index.md
   # - foldable-traverse/foldable.md
   # - foldable-traverse/foldable-cats.md
   # - foldable-traverse/traverse.md
