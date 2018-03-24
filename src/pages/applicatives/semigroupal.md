@@ -96,8 +96,8 @@ case class Cat(name: String, born: Int, color: String)
 
 ```tut:book
 (
-  Option("Garfield")
-  Option(1978)
+  Option("Garfield"),
+  Option(1978),
   Option("Orange & black")
 ).mapN(Cat.apply)
 ```
@@ -125,7 +125,7 @@ Apply 構文は、[Contravariant][#contravariant]または[Invariant][#invariant
 例えば、`Invariant`を用いて複数の`Monoid`を合成することができる。
 これは次のようになる:
 
-```
+```tut:book:silent
 import cats.Monoid
 import cats.instances.boolean._ // for Monoid
 import cats.instances.int._     // for Monoid

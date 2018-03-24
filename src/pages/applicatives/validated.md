@@ -280,7 +280,7 @@ getName(Map())
 ```tut:book:silent
 import cats.syntax.either._ // for catchOnly
 
-type = NumFmtExn = NumberFormatException
+type NumFmtExn = NumberFormatException
 
 def parseInt(name: String)(data: String): FailFast[Int] =
   Either.catchOnly[NumFmtExn](data.toInt).
@@ -315,7 +315,7 @@ def nonBlank(name: String)(data: String): FailFast[String] =
 
 def nonNegative(name: String)(data: Int): FailFast[Int] =
   Right(data).
-    ensure(List(s"$name must be non-negative))(_ >= 0)
+    ensure(List(s"$name must be non-negative"))(_ >= 0)
 ```
 
 これを利用する例をいくつか示す:
