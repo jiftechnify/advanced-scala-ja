@@ -75,7 +75,7 @@ pages:
   - applicatives/examples.md
   - applicatives/validated.md
   - applicatives/applicative.md
-  # - applicatives/summary.md
+  - applicatives/summary.md
   #
   # - foldable-traverse/index.md
   # - foldable-traverse/foldable.md
