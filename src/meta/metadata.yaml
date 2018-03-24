@@ -70,7 +70,7 @@ pages:
   # - monad-transformers/index.md
   # - monad-transformers/summary.md
   #
-  # - applicatives/index.md
+  - applicatives/index.md
   # - applicatives/semigroupal.md
   # - applicatives/examples.md
   # - applicatives/validated.md
