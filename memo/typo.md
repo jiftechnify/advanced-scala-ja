@@ -13,3 +13,8 @@
 > The calls to `parseInt` and `Future.apply` above
 
 - 上に`Future.apply`の呼び出しは登場していない。コード例が間違っている?
+
+### validated
+> l250.
+
+- なぜかコメントアウトされている
