@@ -66,7 +66,7 @@ List(1, 2, 3).foldLeft(List.empty[Int])((a, i) => i :: a)
 右から左への畳み込みは要素の順番を変えずにリストをコピーする:
 
 ```tut:book
-List(1, 2, 3).foldRight(List.empty[Int])((a, i) => i :: a)
+List(1, 2, 3).foldRight(List.empty[Int])((i, a) => i :: a)
 ```
 
 型エラーを避けるには、蓄積変数の型をよく考えて指定しなければならないことに注意してほしい。

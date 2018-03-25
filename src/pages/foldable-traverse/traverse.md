@@ -159,7 +159,7 @@ import scala.language.higherKinds
 def listTraverse[F[_]: Applicative, A, B]
       (list: List[A])(func: A => F[B]): F[List[B]] =
   list.foldLeft(List.empty[B].pure[F]) { (accum, item) =>
-    (accum, func(item)).mapN(_ :+ _))
+    (accum, func(item)).mapN(_ :+ _)
   }
 
 def listSequence[F[_]: Applicative, B]
