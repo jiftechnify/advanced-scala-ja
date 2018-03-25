@@ -81,7 +81,7 @@ pages:
   - foldable-traverse/foldable.md
   - foldable-traverse/foldable-cats.md
   - foldable-traverse/traverse.md
-  # - foldable-traverse/traverse-cats.md
+  - foldable-traverse/traverse-cats.md
   # - foldable-traverse/summary.md
   #
   # - parts/part2.md
