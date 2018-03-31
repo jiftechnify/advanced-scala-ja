@@ -86,7 +86,7 @@ pages:
   #
   # - parts/part2.md
   #
-  # - case-studies/testing/index.md
+  - case-studies/testing/index.md
   #
   # - case-studies/map-reduce/index.md
   #
