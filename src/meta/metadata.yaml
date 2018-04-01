@@ -91,7 +91,7 @@ pages:
   - case-studies/map-reduce/index.md
   #
   - case-studies/validation/index.md
-  # - case-studies/validation/sketch.md
+  - case-studies/validation/sketch.md
   # - case-studies/validation/check.md
   # - case-studies/validation/map.md
   # - case-studies/validation/kleisli.md
