@@ -98,7 +98,7 @@ pages:
   - case-studies/validation/conclusions.md
   #
   - case-studies/crdt/index.md
-  # - case-studies/crdt/eventual-consistency.md
+  - case-studies/crdt/eventual-consistency.md
   # - case-studies/crdt/g-counter.md
   # - case-studies/crdt/generalisation.md
   # - case-studies/crdt/abstraction.md
