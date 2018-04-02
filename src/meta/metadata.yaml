@@ -95,7 +95,7 @@ pages:
   - case-studies/validation/check.md
   - case-studies/validation/map.md
   - case-studies/validation/kleisli.md
-  # - case-studies/validation/conclusions.md
+  - case-studies/validation/conclusions.md
   #
   # - case-studies/crdt/index.md
   # - case-studies/crdt/eventual-consistency.md
