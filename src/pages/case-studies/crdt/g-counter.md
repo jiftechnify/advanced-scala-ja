@@ -95,7 +95,7 @@ final case class GCounter(counters: Map[String, Int]) {
     })
 
   def total: Int =
-    conters.values.sum
+    counters.values.sum
 }
 ```
 </div>

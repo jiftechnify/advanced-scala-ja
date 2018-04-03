@@ -198,7 +198,7 @@ import cats.syntax.semigroup._ // for |+|
 object wrapper {
   sealed trait Check[E, A] {
     def and(that: Check[E, A]): Check[E, A] =
-      And(this, taht)
+      And(this, that)
 
     def apply(a: A)(implicit s: Semigroup[E]): Either[E, A] =
       this match {
@@ -350,7 +350,7 @@ object wrapper {
     right: Check[E, A]) extends Check[E, A]
 
   final case class Or[E, A](
-    leftL Check[E, A],
+    left: Check[E, A],
     right: Check[E, A]) extends Check[E, A]
 
   final case class Pure[E, A](

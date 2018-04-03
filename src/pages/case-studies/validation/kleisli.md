@@ -232,7 +232,7 @@ def checkPred[A](pred: Predicate[Errors, A]): Check[A, A] =
 def longerThan(n: Int): Predicate[Errors, String] =
   Predicate.lift(
     error(s"Must be longer than $n characters"),
-    str => str.siza > n)
+    str => str.size > n)
 
 val alphanumeric: Predicate[Errors, String] =
   Predicate.lift(
@@ -268,10 +268,10 @@ val splitEmail: Check[String, (String, String)] =
 val checkLeft: Check[String, String] =
   checkPred(longerThan(0))
 
-val checkRight: Check[(String, String), String] =
+val checkRight: Check[String, String] =
   checkPred(longerThan(3) and contains('.'))
 
-val joinEmail: check[(String, String), String] =
+val joinEmail: Check[(String, String), String] =
   check {
     case (l, r) =>
       (checkLeft(l), checkRight(r)).mapN(_ + "@" + _)

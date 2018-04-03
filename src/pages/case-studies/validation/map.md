@@ -9,7 +9,7 @@
 現在の`Check`の定義では、入力と出力の型が同じでなければならない:
 
 ```tut:book:silent
-type Check[E, A] => A => Either[E, A]
+type Check[E, A] = A => Either[E, A]
 ```
 
 チェックを変換するとき、結果にはどの型を割り当てればいいのだろうか?
@@ -101,7 +101,7 @@ object wrapper {
             case Invalid(e1) =>
               right(a) match {
                 case Valid(a2)   => Valid(a)
-                vase Invalid(e2) => Invalid(e1 |+| e2)
+                case Invalid(e2) => Invalid(e1 |+| e2)
               }
           }
       }
@@ -276,7 +276,7 @@ object wrapper {
     check2: Check[E, B, C]) extends Check[E, A, C] {
 
     def apply(a: A)(implicit s: Semigroup[E]): Validated[E, C] =
-      check1(a).withEither(_.flatMap(b => check(b).toEither))
+      check1(a).withEither(_.flatMap(b => check2(b).toEither))
   }
 }; import wrapper._
 ```
@@ -312,7 +312,7 @@ object wrapper {
     def or(that: Predicate[E, A]): Predicate[E, A] =
       Or(this, that)
 
-    def apply(a: A)(imolicit s: Semigroup[E]): Validated[E, A] =
+    def apply(a: A)(implicit s: Semigroup[E]): Validated[E, A] =
       this match {
         case Pure(func) =>
           func(a)
@@ -379,7 +379,7 @@ object wrapper {
       func: B => C) extends Check[E, A, C] {
 
       def apply(a: A)
-          (imolicit s: Semigroup[E]): Validated[E, C] =
+          (implicit s: Semigroup[E]): Validated[E, C] =
         check(a) map func
     }
 

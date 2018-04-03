@@ -104,7 +104,7 @@ import cats.kernel.CommutativeMonoid
 ```tut:book:silent
 object wrapper {
   trait BoundedSemiLattice[A] extends CommutativeMonoid[A] {
-    def combine(a1: A, a2: A) = A
+    def combine(a1: A, a2: A): A
     def empty: A
   }
 
