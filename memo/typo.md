@@ -19,3 +19,18 @@
 > The call to `map` then combines the `match` using
 
 - `match`とは? batchの間違いと解釈して訳しておく
+
+### crdt
+#### generalisation
+> l83.
+> Since `increment` and `get` both use
+
+- `get`とは? 文脈的にはおそらく`total`
+
+> l108.
+> but doesn't provide one
+> for bounded semilattice[^spire].
+
+- `BoundedSemiLattice`型クラスは存在するように見える
+  + [ソース](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/BoundedSemilattice.scala)
+  + ないので自分で作る流れになっている。あることにすれば自作部分はカットすることになる。
