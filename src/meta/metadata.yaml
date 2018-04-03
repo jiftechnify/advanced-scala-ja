@@ -84,7 +84,7 @@ pages:
   # - foldable-traverse/traverse-cats.md
   # - foldable-traverse/summary.md
   #
-  # - parts/part2.md
+  - parts/part2.md
   #
   - case-studies/testing/index.md
   #
