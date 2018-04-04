@@ -29,7 +29,7 @@ trait Eq[A] {
 }
 ```
 
-[`cats.syntax.eq`][cats.syntax.eq]で定義されたインターフェイス構文は、`Eq[A]`のインスタンスがスコープに入っている限り、等価性チェックを行う2つのメソッドを提供する:
+[`cats.syntax.eq`][cats.syntax.eq]で定義されたインターフェイス構文は、`Eq[A]`のインスタンスがスコープ内にある限り、等価性チェックを行う2つのメソッドを提供する:
 
  - `===` は、2つのオブジェクトが等価かどうかを判定する
  - `=!=` は、2つのオブジェクトが非等価かどうかを判定する
@@ -50,14 +50,14 @@ import cats.instances.int._ // for Eq
 val eqInt = Eq[Int]
 ```
 
-`eqInt`を直接利用して等価性検査を行うこともできる:
+`eqInt`を直接利用して等価性検査を行うことができる:
 
 ```tut:book
 eqInt.eqv(123, 123)
 eqInt.eqv(123, 234)
 ```
 
-Scala の `==`メソッドとは違って、`eqv`メソッドで異なる型のオブジェクト同士を比較しようとすると、コンパイルエラーとなる:
+Scala の `==`メソッドとは違って、`eqv`メソッドを用いて異なる型のオブジェクト同士を比較しようとすると、コンパイルエラーとなる:
 
 ```tut:book:fail
 eqInt.eqv(123, "234")
@@ -83,7 +83,7 @@ import cats.syntax.eq._ // for === and =!=
 ### Option の比較 {#sec:type-classes:comparing-options}
 
 さて、`Option[Int]`の比較という、もっと興味深い例を見ていこう。
-型`Option[Int]`の値同士を比較するには、`Int`だけでなく`Option`に対する`Eq`のインスタンスもインポートする必要がある:
+`Option[Int]`型の値同士を比較するには、`Int`だけでなく`Option`に対する`Eq`のインスタンスもインポートする必要がある:
 
 ```tut:book:silent
 import cats.instances.int._    // for Eq
@@ -104,7 +104,7 @@ Some(1) === None
 (Some(1) : Option[Int]) === (None : Option[Int])
 ```
 
-標準ライブラリにある`Option.apply`と`Option.empty`メソッドを使えば、同じことをより親しみやすい形で表現できる:
+標準ライブラリにある`Option.apply`と`Option.empty`メソッドを使えば、同じことをより分かりやすい形で表現できる:
 
 ```tut:book
 Option(1) === Option.empty[Int]
@@ -121,9 +121,9 @@ import cats.syntax.option._ // for some and none
 1.some =!= none[Int]
 ```
 
-### 自分だけの型を比較する
+### 独自型の比較
 
-`(A, A) => Boolean`という型の関数を受け取って`Eq[A]`を返す`Eq.instance`メソッドを利用して、自分だけの`Eq`のインスタンスを定義できる:
+`(A, A) => Boolean`という型の関数を受け取って`Eq[A]`を返す`Eq.instance`メソッドを利用して、独自の`Eq`インスタンスを定義できる:
 
 ```tut:book:silent
 import java.util.Date

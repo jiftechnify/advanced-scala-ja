@@ -19,7 +19,7 @@ final case class JsString(get: String) extends Json
 final case class JsNumber(get: Double) extends Json
 case object JsNull extends Json
 
-// 「JSONにシリアライズできる」という振る舞いをトレイトとして表す
+// 「JSONにシリアライズできる」という振る舞いをトレイトの形で表す
 trait JsonWriter[A] {
   def write(value: A): Json
 }
@@ -58,15 +58,15 @@ object JsonWriterInstances {
 
 ### 型クラスのインターフェイス
 
-型クラスの **インターフェイス** は、ユーザに公開する全ての機能を指す。
-インターフェイスは、型クラスのインスタンスを暗黙のパラメータとして受け取る、ジェネリックなメソッドとして定義される。
+型クラスの **インターフェイス** は、ユーザに公開するすべての機能を指す。
+インターフェイスは、型クラスのインスタンスを暗黙の引数として受け取る、ジェネリックなメソッドとして定義される。
 
 インターフェイスを定義するのに使われる2つの一般的な方法がある:
 **インターフェイスオブジェクト** と **インターフェイス構文** だ。
 
 **インターフェイスオブジェクト**
 
-インターフェイスを定義するための最も単純な方法は、シングルトンオブジェクトの中にメソッドを配置するという方法だ:
+インターフェイスを定義するための最も単純な方法は、シングルトンオブジェクトの中にメソッドを配置するというものだ:
 
 ```tut:book:silent
 object Json {
@@ -85,7 +85,7 @@ import JsonWriterInstances._
 Json.toJson(Person("Dave", "dave@example.com"))
 ```
 
-コンパイラは、暗黙のパラメータが与えられていない`toJson` メソッドの呼び出しを検出すると、適切な型を持つ型クラスのインスタンスを探してメソッド呼び出しに挿入する。
+コンパイラは、暗黙の引数が与えられていない`toJson` メソッドの呼び出しを検出すると、適切な型を持つ型クラスのインスタンスを探してメソッド呼び出しに挿入する:
 
 ```tut:book:silent
 Json.toJson(Person("Dave", "dave@example.com"))(personWriter)
@@ -118,7 +118,7 @@ import JsonSyntax._
 Person("Dave", "dave@example.com").toJson
 ```
 
-この場合も、コンパイラは暗黙のパラメータに与える値の候補を探し、補完してくれる:
+この場合も、コンパイラは暗黙の引数に与える値の候補を探し、補完してくれる:
 
 ```tut:book
 Person("Dave", "dave@example.com").toJson(personWriter)
@@ -135,7 +135,7 @@ def implicitly[A](implicit value: A): A =
 ```
 
 `implicitly` を利用すれば、暗黙のスコープからどんな値でも召喚することができる。
-所望の型を指定すれば、残った仕事は`implicitly`が全てやってくれる:
+所望の型を指定すれば、残った仕事は`implicitly`がすべてやってくれる:
 
 ```scala
 import JsonWriterInstances._
@@ -143,5 +143,5 @@ import JsonWriterInstances._
 implicitly[JsonWriter[String]]
 ```
 
-Cats に含まれる多くの型クラスは、他にもインスタンスを召喚するための方法を提供しているが、それでも`implicitly`はデバッグにおいて良い代替品となる。
+Cats に含まれる多くの型クラスは、他にもインスタンスを召喚するための方法を提供しているが、それでも`implicitly`はデバッグにおいては良い代用品となる。
 コードの任意の場所に`implicitly`の呼び出しを挿入すれば、コンパイラが型クラスのインスタンスを見つけられることや、曖昧な暗黙の値によるエラーがないことを確認できる。
