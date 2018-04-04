@@ -70,7 +70,7 @@ object wrapper {
 
 <div class="solution">
 このインスタンスの完全なコードを以下に示す。
-これをグローカルな暗黙スコープに配置するには、この定義を`GCounter`のコンパニオンオブジェクトの中に書くとよい:
+これをグローバルな暗黙スコープに配置するには、この定義を`GCounter`のコンパニオンオブジェクトの中に書くとよい:
 
 ```tut:book:silent
 import cats.instances.list._   // for Monoid
