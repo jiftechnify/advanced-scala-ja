@@ -5,7 +5,7 @@
 
 ほとんどの Scala 開発者は、一度は次のようなコードを書いたことがあるだろう:
 
-```scala
+```tut:book
 List(1, 2, 3).map(Option(_)).filter(item => item == 1)
 ```
 
@@ -29,7 +29,7 @@ trait Eq[A] {
 }
 ```
 
-[`cats.syntax.eq`][cats.syntax.eq]で定義されたインターフェイス構文は、`Eq[A]`のインスタンスがスコープに入っている限り、等価性チェックを行う2つのメソッドを提供する:
+[`cats.syntax.eq`][cats.syntax.eq]で定義されたインターフェイス構文は、`Eq[A]`のインスタンスがスコープ内にある限り、等価性チェックを行う2つのメソッドを提供する:
 
  - `===` は、2つのオブジェクトが等価かどうかを判定する
  - `=!=` は、2つのオブジェクトが非等価かどうかを判定する
@@ -38,61 +38,61 @@ trait Eq[A] {
 
 いくつか例を見ていこう。まず、型クラスをインポートする:
 
-```scala
+```tut:book:silent
 import cats.Eq
 ```
 
 次に、`Int`のインスタンスを取り込もう:
 
-```scala
+```tut:book:silent
 import cats.instances.int._ // for Eq
 
 val eqInt = Eq[Int]
 ```
 
-`eqInt`を直接利用して等価性検査を行うこともできる:
+`eqInt`を直接利用して等価性検査を行うことができる:
 
-```scala
+``tut:book
 eqInt.eqv(123, 123)
 eqInt.eqv(123, 234)
 ```
 
-Scala の `==`メソッドとは違って、`eqv`メソッドで異なる型のオブジェクト同士を比較しようとすると、コンパイルエラーとなる:
+Scala の `==`メソッドとは違って、`eqv`メソッドを用いて異なる型のオブジェクト同士を比較しようとすると、コンパイルエラーとなる:
 
-```scala
+```tut:book:fail
 eqInt.eqv(123, "234")
 ```
 
 [`cats.syntax.eq`][cats.syntax.eq]にあるインターフェイス構文をインポートして、`===`や`=!=`メソッドを利用することもできる:
 
-```scala
+```tut:book:silent
 import cats.syntax.eq._ // for === and =!=
 ```
 
-```scala
+```tut:book
 123 === 123
 123 =!= 234
 ```
 
 やはり、異なる型の値同士を比較するとコンパイルエラーとなる:
 
-```scala
+```tut:book:fail
 123 === "123"
 ```
 
 ### Option の比較 {#sec:type-classes:comparing-options}
 
 さて、`Option[Int]`の比較という、もっと興味深い例を見ていこう。
-型`Option[Int]`の値同士を比較するには、`Int`だけでなく`Option`に対する`Eq`のインスタンスもインポートする必要がある:
+`Option[Int]`型の値同士を比較するには、`Int`だけでなく`Option`に対する`Eq`のインスタンスもインポートする必要がある:
 
-```scala
+```tut:book:silent
 import cats.instances.int._    // for Eq
 import cats.instances.option._ // for Eq
 ```
 
 比較を試してみる:
 
-```scala
+```tut:fail:book
 Some(1) === None
 ```
 
@@ -100,30 +100,30 @@ Some(1) === None
 `Int`と`Option[Int]`に対する`Eq`のインスタンスはスコープの中にある。しかし上の式では`Some[Int]`型の値を比較することになってしまう。
 この問題を修正するには、引数の型を`Option[Int]`と指定し直す必要がある:
 
-```scala
+```tut:book
 (Some(1) : Option[Int]) === (None : Option[Int])
 ```
 
-標準ライブラリにある`Option.apply`と`Option.empty`メソッドを使えば、同じことをより親しみやすい形で表現できる:
+標準ライブラリにある`Option.apply`と`Option.empty`メソッドを使えば、同じことをより分かりやすい形で表現できる:
 
-```scala
+```tut:book
 Option(1) === Option.empty[Int]
 ```
 
 もしくは、[`cats.syntax.option`][cats.syntax.option]に用意された特別な構文を使ってもいい:
 
-```scala
+```tut:book:silent
 import cats.syntax.option._ // for some and none
 ```
 
-```scala
+```tut:book
 1.some === none[Int]
 1.some =!= none[Int]
 ```
 
-### 自分だけの型を比較する
+### 独自型の比較
 
-`(A, A) => Boolean`という型の関数を受け取って`Eq[A]`を返す`Eq.instance`メソッドを利用して、自分だけの`Eq`のインスタンスを定義できる:
+`(A, A) => Boolean`という型の関数を受け取って`Eq[A]`を返す`Eq.instance`メソッドを利用して、独自の`Eq`インスタンスを定義できる:
 
 ```tut:book:silent
 import java.util.Date

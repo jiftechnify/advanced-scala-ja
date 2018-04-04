@@ -1,25 +1,25 @@
 ## 演習: Printable ライブラリ
 
-Scala は、どんな値でも`String`に変換できるように、`toString`メソッドを提供している。
+Scala は、任意の値を`String`に変換できるように、`toString`メソッドを提供している。
 しかし、このメソッドにはいくつかの欠点がある:
 このメソッドは **すべての** 型に対して実装されており、多くの実装は使い物にならず、特定の型に対して特別な実装を選択することができない。
 
 この問題に対処するために、`Printable`型クラスを定義しよう:
 
  1. 1つのメソッド`format`を持つ型クラス`Printable[A]`を定義せよ。
-    `format`は、型`A`の値を受け取って`String`を返すようにすること。
+    `format`は、`A`型の値を受け取って`String`を返すようにすること。
 
  2. `String`と`Int`用のインスタンスを含む`PrintableInstances`オブジェクトを作成せよ。
 
  3. 2つのジェネリックなインターフェイスメソッドを持つ`Printable`オブジェクトを定義せよ。
 
-    `format`は、型`A`の値と対応する`Printable`を取り、それを利用して`A`を`String`に変換するようにする。
+    `format`は、`A`型の値と対応する`Printable`をとり、それを利用して`A`を`String`に変換する。
 
-    `print`は、`format`と同じ引数をとり、`Unit`を返すようにする。
-    また、`println`を利用して型`A`の値を出力するようにすること。
+    `print`は、`format`と同じ引数をとり、`Unit`を返す。
+    同時に、`println`を利用して`A`型の値を出力する。
 
 <div class="solution">
-これらのステップは型クラスの3つの構成要素を定義する。
+これらのステップは、型クラスの3つの構成要素を定義するものである。
 まず、`Printable`--- **型クラス** それ自身を定義する:
 
 ```tut:book:silent
@@ -28,7 +28,7 @@ trait Printable[A] {
 }
 ```
 
-そして、いくつかの`Printable`のデフォルトインスタンスを定義し、それを`PrintableInstances`に入れる:
+そして、いくつかの`Printable`のデフォルトインスタンスを定義し、それを`PrintableInstances`にまとめる:
 
 ```tut:book:silent
 object PrintableInstances {
@@ -57,7 +57,7 @@ object Printable {
 
 **ライブラリを利用する**
 
-以上のコードは、多くの場所で応用できる汎用的な出力ライブラリを成す。
+以上のコードは、多くの場所で応用できる汎用的な出力ライブラリとなっている。
 このライブラリを利用した「アプリケーション」を作成してみよう。
 
 まず、誰もが知っているあのモフモフした動物を表現するデータ型を定義する:
@@ -66,7 +66,7 @@ object Printable {
 final case class Cat(name: String, age: Int, color: String)
 ```
 
-次に、以下のような形式で内容を返す、`Cat`のための`Printable`の実装を定義する:
+次に、以下のような形式で内容を返す、`Cat`に対するの`Printable`の実装を定義する:
 
 ```ruby
 NAME is a AGE year-old COLOR cat.
@@ -90,7 +90,7 @@ val cat = Cat(/* ... */)
 final case class Cat(name: String, age: Int, color: String)
 ```
 
-次に、関心のある型のための型クラスインスタンスを定義する。
+次に、関心のある型に対する型クラスのインスタンスを定義する。
 これらは`Cat`のコンパニオンオブジェクトの中に置いても、名前空間としてはたらく別のオブジェクトの中に置いてもよい:
 
 ```tut:book:silent
@@ -123,7 +123,7 @@ Printable.print(cat)
 
  1. `PrintableSyntax`という名前のオブジェクトを作れ。
 
- 2. `PrintableSyntax`の中に暗黙のクラス`implicit class PrintableOps[A]`を定義し、型`A`の値を包めるようにせよ。
+ 2. `PrintableSyntax`の中に暗黙のクラス`implicit class PrintableOps[A]`を定義し、`A`型の値を包めるようにせよ。
 
  3. `PrintableOps`に次のメソッドを定義せよ:
 
