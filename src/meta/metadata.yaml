@@ -31,17 +31,17 @@ pages:
   - intro/conventions.md
   - intro/contributors.md
   - intro/backers.md
-  #
-  # - parts/part1.md
-  #
-  # - type-classes/index.md
-  # - type-classes/anatomy.md
-  # - type-classes/implicits.md
-  # - type-classes/printable.md
-  # - type-classes/cats.md
-  # - type-classes/equal.md
-  # - type-classes/instance-selection.md
-  # - type-classes/summary.md
+
+  - parts/part1.md
+
+  - type-classes/index.md
+  - type-classes/anatomy.md
+  - type-classes/implicits.md
+  - type-classes/printable.md
+  - type-classes/cats.md
+  - type-classes/equal.md
+  - type-classes/instance-selection.md
+  - type-classes/summary.md
   #
   # - monoids/index.md
   # - monoids/cats.md
@@ -110,9 +110,9 @@ pages:
   # - case-studies/parser/transforms.md
   # - case-studies/parser/applicative.md
 
-  # - parts/part3.md
-  #
-  # - solutions.md
+  - parts/part3.md
+
+  - solutions.md
   - links.md
   #
   # - parts/part4.md
