@@ -57,10 +57,10 @@ $if(mainfont)$
 $else$
     \setmainfont[%
       Color=primary,
-      Path=$lib-dir$/fonts/Lato/,
-      BoldItalicFont=Lato-BlackItalic,
-      BoldFont=Lato-Bold,
-      ItalicFont=Lato-Italic]{Lato-Regular}
+      Path=$lib-dir$/fonts/Noto/,
+      BoldItalicFont=NotoSansCJK-Bold,
+      BoldFont=NotoSansCJK-Bold,
+      ItalicFont=NotoSansCJK-Regular]{NotoSansCJK-Regular}
 $endif$
 
 $if(sansfont)$
@@ -68,10 +68,10 @@ $if(sansfont)$
 $else$
     \setsansfont[%
       Color=primary,
-      Path=$lib-dir$/fonts/Lato/,
-      BoldItalicFont=Lato-BlackItalic,
-      BoldFont=Lato-Bold,
-      ItalicFont=Lato-Italic]{Lato-Regular}
+      Path=$lib-dir$/fonts/Noto/,
+      BoldItalicFont=NotoSansCJK-Bold,
+      BoldFont=NotoSansCJK-Bold,
+      ItalicFont=NotoSansCJK-Regular]{NotoSansCJK-Regular}
 $endif$
 
 $if(monofont)$
@@ -133,8 +133,10 @@ $endif$
 $if(graphics)$
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+% \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+% \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\def\maxwidth{5pt}
+\def\maxheight{5pt}
 \makeatother
 $endif$
 \ifxetex
@@ -393,7 +395,7 @@ $endif$
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
 % Include-before hook ---------------------------
 
