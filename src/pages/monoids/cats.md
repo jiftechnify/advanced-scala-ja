@@ -141,7 +141,7 @@ def add(items: List[Int]): Int =
 
 <div class="solution">
 `Monoid`の出番だ。
-`Int`の加算と`Option[Int]`のインスタンスの加算の両方を行うただ1つのメソッドが必要とされている。
+`Int`の加算と`Option[Int]`のインスタンスの加算の両方を行う、ただ1つのメソッドが必要とされている。
 これを、`Monoid`を暗黙の引数にとるジェネリックなメソッドとして書き下すことができる:
 
 ```tut:book:silent
@@ -160,7 +160,7 @@ def add[A: Monoid](items: List[A]): A =
   items.foldLeft(Monoid[A].empty)(_ |+| _)
 ```
 
-要求の通り、このコードを型`Int`の値と`Option[Int]`の値の両方を足し合わせるのに利用できる:
+要求の通り、このコードを`Int`型の値と`Option[Int]`の値の両方を足し合わせるのに利用できる:
 
 ```tut:book:silent
 import cats.instances.int._ // for Monoid
