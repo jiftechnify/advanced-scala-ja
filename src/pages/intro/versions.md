@@ -27,7 +27,7 @@ $ sbt new underscoreio/cats-seed.g8
 ```
 
 これで、Cats を依存関係に含んだサンドボックスプロジェクトが生成されるはずだ。
-サンプルコードを動かす方法や、対話型 Scala コンソールを開始する方法については、自動生成された `README.md` を参照されたい。
+サンプルコードを動かす方法や、対話型 Scala コンソールを開始する方法については、自動生成された `README.md` を参照してほしい。
 
 `cats-seed` は必要最小限のテンプレートになっている。
 もっと多くの「バッテリー」が同梱されたところから始めたければ、Typelevel の `sbt-catalysts` テンプレートを利用するとよい:
@@ -36,5 +36,5 @@ $ sbt new underscoreio/cats-seed.g8
 $ sbt new typelevel/sbt-catalysts.g8
 ```
 
-これは一通りの依存ライブラリやコンパイラプラグインを取り込むと同時に、単体テストと [tutを利用した][link-tut] ドキュメントのためのテンプレートを生成する。
-詳しくは、[catalysts][link-catalysts]と[sbt-catalysts][link-sbt-catalysts]のプロジェクトページを参照のこと。
+これはひと通りの依存ライブラリやコンパイラプラグインを取り込むと同時に、単体テストと [tutを利用した][link-tut] ドキュメントのためのテンプレートを生成する。
+詳しくは、[catalysts][link-catalysts]や[sbt-catalysts][link-sbt-catalysts]のプロジェクトページを参照のこと。
