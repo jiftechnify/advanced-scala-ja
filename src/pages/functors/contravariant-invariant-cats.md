@@ -51,8 +51,8 @@ showString.contramap[Symbol](_.name).show('dave)
 
 ### Cats における非変ファンクタ
 
-数ある中でも特筆すべきことに、Cats は`Monoid`に対する`Invariant`のインスタンスを提供している。
-これは[@sec:functors:invariant]節で紹介した `Codec`の例とは少し異なっている。
+Cats が`Monoid`に対する`Invariant`のインスタンスを提供していることは特筆に値する。
+これは[@sec:functors:invariant]節で紹介した `Codec`の例とは少々異なっている。
 
 `Monoid`が次のようなものであることを覚えているだろうか:
 
@@ -67,7 +67,7 @@ trait Monoid[A] {
 
 Scalaの [`Symbol`][link-symbol]型に対する`Monoid`を作りたいとしよう。
 Cats は`Symbol`に対する`Monoid`インスタンスは提供していないが、`String`というよく似た型に対する`Monoid`を提供している。
-空の`String`に基づいた`empty`メソッドと、次のように動作する`combine`メソッドを持つ新しいモノイドを書くことができる:
+空の`String`に基づく`empty`メソッドと、次のように動作する`combine`メソッドを持つ、新しいモノイドを書くことができる:
 
 1. 2つの`Symbol`を引数として受け取る
 2. `Symbol`を`String`に変換する

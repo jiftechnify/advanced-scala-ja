@@ -47,7 +47,7 @@ trait Function1[-A, +B] {
 }
 ```
 
-コンパイラは、`Functor`に渡せる正しいカインドを持つ型コンストラクタを作り出すために、`Function1`の2つの型パラメータのうち1つを固定しなければならない。
+コンパイラは、`Functor`に渡す正しいカインドを持つ型コンストラクタを作り出すために、`Function1`の2つの型パラメータのうち1つを固定しなければならない。
 これには2つの選択肢がある:
 
 ```tut:book:silent
@@ -88,13 +88,13 @@ either.map(_ + 1)
 ```
 
 しかし、左から右への消去が正しい選択でない状況もある。
-1つの例としては、[Scalactic][link-scalactic]にある`Or`型が挙げられる。これは`Either`を「左バイアス」にしたものに等しい型である:
+ひとつの例としては、[Scalactic][link-scalactic]にある`Or`型が挙げられる。これは`Either`を「左バイアス」にしたものに等しい型である:
 
 ```scala
 type PossibleResult = ActualResult Or Error
 ```
 
-もう1つの例は、`Function1`に対する`Contravariant`だ。
+もうひとつの例は、`Function1`に対する`Contravariant`だ。
 
 `Function1`に対する共変な`Functor`が`andThen`のような左から右への関数合成を表現する一方で、`Contravariant`は`compose`のような右から左への合成を表現する。
 言い換えれば、以下の式はすべて等価である:
@@ -123,7 +123,7 @@ import cats.syntax.contravariant._ // for contramap
 val func3c = func2.contramap(func1)
 ```
 
-ここでの問題は、`Function1`に対する`Contravariant`は返り値の型を固定し、引数の型を変数のままにするということである。コンパイラは、以下のコードおよび図[@fig:functors:function-contramap-type-chart]に示すように、型パラメータを「右から左へ」消去しなければならない:
+ここでの問題は、`Function1`に対する`Contravariant`は返り値の型を固定し、引数の型を変数のままにするということである。コンパイラは、以下のコードや図[@fig:functors:function-contramap-type-chart]に示すように、型パラメータを「右から左へ」消去しなければならない:
 
 ```scala
 type F[A] = A => Double

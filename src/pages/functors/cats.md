@@ -7,7 +7,7 @@ Cats におけるファンクタの実装を見ていこう。
 
 ファンクタ型クラスは[`cats.Functor`][cats.Functor]にある。
 コンパニオンオブジェクトにある標準の`Functor.apply`メソッドを利用して、インスタンスを得ることができる。
-いつものように、組み込みのインスタンスは[`cats.instances`][cats.instances]に並べられている:
+いつものように、組み込みのインスタンスは[`cats.instances`][cats.instances]にまとめられている:
 
 ```tut:book:silent
 import scala.language.higherKinds
@@ -24,7 +24,7 @@ val option1 = Option(123)
 val option2 = Functor[Option].map(option1)(_.toString)
 ```
 
-`Functor`は`lift`メソッドも提供している。これは型`A => B`の関数を`F[A] => F[B]`という型を持つ、ファンクタの上で動作する関数に変換する。
+`Functor`は`lift`メソッドも提供している。これは`A => B`型の関数を、`F[A] => F[B]`という型を持つファンクタの上で動作する関数に変換する。
 
 ```tut:book
 val func = (x: Int) => x + 1
@@ -37,8 +37,8 @@ liftedFunc(Option(1))
 ### ファンクタの構文
 
 `Functor`の構文によって提供される主要なメソッドは`map`だ。
-`Option`や`List`を使ってこれを実演するのは難しい。なぜならこれらの型は組み込みの `map`メソッドを持っており、Scala コンパイラは常に拡張メソッドよりも組み込みのメソッドを優先するためである。
-2つの例を用いてこれに対処する。
+`Option`や`List`を使ってこれを例示するのは難しい。なぜなら、これらの型は組み込みの `map`メソッドを持っており、Scala コンパイラは常に拡張メソッドよりも組み込みのメソッドを優先するためである。
+この問題を回避した2つの例を見ていく。
 
 まず、関数の変換を見ていこう。
 Scala の`Function1`型は`map`メソッドを持たない(その代わり、`andThen`と呼ばれている)ので、名前の衝突は発生しない:
@@ -59,7 +59,7 @@ val func4 = func1.map(func2).map(func3)
 func4(123)
 ```
 
-もう1つの例を見ていこう。
+もうひとつの例を見ていこう。
 特定の具体的な型ではなく、すべてのファンクタに対して動くような抽象化を行う時が来た。
 ファンクタが表す文脈にかかわらず、中身の数値に同じ式を適用するようなメソッドを書くことができる:
 
@@ -101,7 +101,7 @@ new FunctorOps(foo).map(value => value + 1)
 ```
 
 `FunctorOps`の`map`メソッドは暗黙の`Functor`インスタンスを引数として要求している。
-これは、`foo`に対する`Functor`のインスタンスがあるときに限りこのコードがコンパイルを通るということを意味する。そうでなければ、コンパイルエラーとなる:
+これは、`foo`に対する`Functor`のインスタンスがあるときに限りこのコードがコンパイルに成功する、ということを意味する。そうでなければ、コンパイルエラーとなる:
 
 ```tut:book:silent
 final case class Box[A](value: A)
@@ -127,8 +127,8 @@ implicit val optionFunctor: Functor[Option] =
   }
 ```
 
-時には独自のインスタンスに依存性を持ち込まなければならないこともある。
-例えば、`Future`に対する`Fucntor`を定義する必要があるとしよう(これも仮の例だ---Cats には既に`cats.instances.future`を提供している)。
+独自のインスタンスが、動作のために何らかの依存オブジェクトを必要とする場合もある。
+例えば、`Future`に対する`Functor`を定義する必要があるとしよう(これも仮の例だ---Cats には既に`cats.instances.future`がある)。
 そのためには、`future.map`に渡す暗黙の`ExecutionContext`引数について考慮しなければならない。
 インスタンスを作る際に、この依存性を考慮しなければならないため、`future.map`に追加の引数を加えることはできない:
 
@@ -144,7 +144,7 @@ implicit def futureFunctor
   }
 ```
 
-`Future`に対する`Fucntor`を召喚するときはいつも、`Functor.apply`を直接利用するか、間接的に`map`拡張メソッドを経由するかして、暗黙値の解決でコンパイラが`futureFunctor`を見つけ、呼び出し地点における`ExecutionContext`を再帰的に探索する。
+`Future`に対する`Fucntor`を召喚するときはいつも、`Functor.apply`を直接利用するか、間接的に`map`拡張メソッドを経由するかして、暗黙値の解決によってコンパイラが`futureFunctor`を見つけ、さらに呼び出し地点における`ExecutionContext`を再帰的に探索する。
 この展開は次のように進む:
 
 ```scala
@@ -161,7 +161,7 @@ Functor[Future](futureFunctor(executionContext))
 ### 演習: ファンクタで分岐
 
 以下の二分木データ型に対する`Functor`を実装せよ。
-`Branch`と`Leaf`に対してコードが期待通りに動作することを確認せよ:
+`Branch`と`Leaf`のそれぞれに対してコードが期待通りに動作することを確認せよ:
 
 ```tut:book:silent
 object wrapper {
@@ -177,7 +177,7 @@ object wrapper {
 <div class="solution">
 その意味は、`List`に対する`Functor`と似ている。
 データ構造を再帰的に探索し、発見したそれぞれの`Leaf`に対して関数を適用すればいい。
-ファンクタの法則は、明らかに`Branch`と`Leaf`について同じ構造を保つことを要求している:
+ファンクタの法則は、明らかに`Branch`と`Leaf`の構造を保つことを要求している:
 
 ```tut:book:silent
 import cats.Functor
@@ -200,9 +200,9 @@ implicit val treeFunctor: Functor[Tree] =
 Branch(Leaf(10), Leaf(20)).map(_ * 2)
 ```
 
-おっと![@sec:variance]節で考えたのと同じ、非変による問題に陥ってしまった。
+おっと! [@sec:variance]節で考えたのと同じ、非変性による問題に陥ってしまった。
 コンパイラは`Tree`に対する`Functor`のインスタンスを見つけることはできるが、`Branch`や`Leaf`に対するインスタンスを見つけることはできない。
-埋め合わせるために、スマートコンストラクタを追加しよう:
+この差を埋め合わせるために、スマートコンストラクタを追加しよう:
 
 ```tut:book:silent
 object Tree {

@@ -1,7 +1,7 @@
 ## 反変ファンクタと非変ファンクタ {#contravariant-invariant}
 
-これまで見てきたように、`Functor`の`map`メソッドは連鎖する計算列の最後に新しい計算を「追加」すると考えることができる。
-ここからは見ていく2つの型クラスのうち、ひとつは計算列の **最初** に新しい計算を追加する。もうひとつは、**両方向** の計算の列を構成する。これらはそれぞれ、 **反変ファンクタ**・**非変ファンクタ** と呼ばれているものである。
+これまで見てきたように、`Functor`の`map`メソッドは連鎖する計算列の「最後」に新しい計算を追加するものだ、と考えることができる。
+これから見ていく2つの型クラスのうち、ひとつは計算列の **最初** に新しい計算を追加する。もうひとつは、**両方向** の計算の列を構成する。これらはそれぞれ、 **反変ファンクタ**・**非変ファンクタ** と呼ばれているものである。
 
 <div class="callout callout-info">
 **この節を読むかはあなた次第だ!**
@@ -9,18 +9,18 @@
 次章で見ていく、モナドという本書で最も重要なパターンを理解するのに、反変・非変ファンクタの知識は必要ない。
 しかし、反変・非変ファンクタの知識は、[@sec:applicatives]章で見る`Semigroupal`や`Applicative`について議論する際は役に立つ。
 
-モナドについて知りたくてたまらないならば、[@sec:monads]章まで飛ばしてかまわない。
+モナドについて知りたくてたまらないならば、[@sec:monads]章まで読み飛ばしてかまわない。
 [@sec:applicatives]章を読む前に、ここに戻ってくればいい。
 </div>
 
 ### 反変ファンクタと *contramap* メソッド {#contravariant}
 
-1つ目の型クラスである **反変ファンクタ** は`contramap`と呼ばれる演算を提供している。これは「計算の列の前に新しい計算を追加する」ことを表現する。
+1つ目の型クラスである **反変ファンクタ** は、`contramap`と呼ばれる演算を提供している。これは「計算の列の前に新しい計算を追加する」ことを表現する。
 一般的な型シグネチャは図[@fig:functors:contramap-type-chart]に示した通りである。
 
 ![型チャート: contramap メソッド](src/pages/functors/generic-contramap.pdf+svg){#fig:functors:contramap-type-chart}
 
-`contramap`メソッドは、**データの変換** を表現するデータ型に対してのみ意味を成す。
+`contramap`メソッドは、**データの変換** を表現するようなデータ型に対してのみ意味を成す。
 例えば、`Option[B]`型の値を`A => B`型の関数に対し「逆方向に」与える方法は存在しないので、`Option`に対して`contramap`を定義することはできない。
 一方、[@sec:type-classes]章で考えた`Printable`型クラスに対しては`contramap`を定義できる:
 
@@ -30,7 +30,7 @@ trait Printable[A] {
 }
 ```
 
-`Printable[A]`は型`A`から`String`への変換を表している。
+`Printable[A]`は`A`型から`String`への変換を表している。
 その`contramap`メソッドは`B => A`型の関数`func`を受け取り、新しい`Printable[B]`を生成する:
 
 ```tut:book:silent
@@ -63,12 +63,12 @@ trait Printable[A] {
 ```
 
 行き詰まったら、型を考えてみよう。
-今しなければならないことは、型`B`の値`value`を`String`に変えることだ。
+今しなければならないことは、`B`型の値`value`を`String`に変えることだ。
 今使える関数とメソッドは何だろうか? それらをどの順で組み合わせればよいだろうか?
 
-<div class=="solution">
+<div class="solution">
 以下に動作する実装を示す。
-まず`func`によって型`B`の値を型`A`に変換し、それから元々の`Printable`を使って`A`の値を`String`に変換している。
+まず`func`によって`B`型の値を`A`型の値に変換し、それから元々の`Printable`を使って`A`の値を`String`に変換している。
 外側と内側の`Printable`を区別するために、外側の方に`self`という別名をつけるトリックを利用している:
 
 ```tut:book:silent
@@ -121,7 +121,7 @@ final case class Box[A](value: A)
 
 <div class="solution">
 任意の型を含む`Box`に対し、ジェネリックなインスタンスを作るには、`Box`の中身の型に対する`Printable`をベースにする。
-すべての定義を自分の手で書くこともできる:
+すべての定義を自分の手で書くことができる:
 
 ```tut:book:silent
 implicit def boxPrintable[A](implicit p: Printable[A]) =
@@ -156,11 +156,11 @@ format(Box(123))
 
 ### 非変ファンクタと *imap* メソッド {#sec:functors:invariant}
 
-**非変ファンクタ** は`imap`メソッドを実装する。これは簡単にいえば`map`と`contramap`を組み合わせたものに等しい。
+**非変ファンクタ** は`imap`メソッドを実装する。これは、ざっくりいえば`map`と`contramap`を組み合わせたものに等しい。
 `map`は関数を計算列の最後に追加することで新しい型クラスのインスタンスを作り、`contramap`は関数を計算列の一番前に追加することで新しい型クラスのインスタンスを作る。そして`imap`は、両方向の変換の組によって新しい型クラスインスタンスを作る。
 
 非変ファンクタの最も分かりやすい例は、Play JSONの[`Format`][link-play-json-format]や scodec の[`Codec`][link-scodec-codec]のような、エンコードとデコードを1つのデータ型として表現するような型クラスである。
-`Printable`を拡張し、`String`へのエンコード・`String`からのデコードを両方サポートする`Codec`を作ることができる:
+`Printable`を拡張し、`String`へのエンコードと`String`からのデコードを両方サポートする`Codec`を作ることができる:
 
 ```tut:book:silent
 trait Codec[A] {
@@ -201,7 +201,7 @@ def decode[A](value: String)(implicit c: Codec[A]): A =
 
 ![型チャート: imap メソッド](src/pages/functors/generic-imap.pdf+svg){#fig:functors:imap-type-chart}
 
-利用例を挙げる。`encode`メソッドも`decode`メソッドも何もしない、基本の`Codec[String]`があるとしよう:
+利用例を挙げる。`encode`メソッドも`decode`メソッドも何も行わない、基本の`Codec[String]`があるとしよう:
 
 ```tut:book:silent
 implicit val stringCodec: Codec[String] =
@@ -211,7 +211,7 @@ implicit val stringCodec: Codec[String] =
   }
 ```
 
-`imap`を利用することで、`stringCodec`を基にして他の型の値を変換するのに使えるたくさんの便利な`Codec`を構成できる:
+`imap`を利用することで、`stringCodec`を基に、他の型の値を変換するのに利用できる多数の便利な`Codec`を構成できる:
 
 ```tut:book:silent
 implicit val intCodec: Codec[Int] =
@@ -222,10 +222,10 @@ implicit val booleanCodec: Codec[Boolean] =
 ```
 
 <div class="callout callout-info">
-**失敗に対処する**
+**失敗への対処**
 
-ここで作った`Codec`型クラスの`decode`メソッドは、変換に失敗することを考慮に入れていないことに注意してほしい。
-より洗練された関係をモデリングしたければ、ファンクタの先にある概念である、`lens`や`optics`を見てみよう。
+ここで作った`Codec`型クラスの`decode`メソッドは、変換の失敗を考慮に入れていないことに注意してほしい。
+より洗練された関係をモデル化したければ、ファンクタより先にある概念である、`lens`や`optics`を見てみよう。
 
 Optics は本書の扱う範囲を超えているが、Julien Truffaut による[Monocle][link-monocle]ライブラリがさらなる探求の良い起点となるだろう。
 </div>
@@ -294,7 +294,7 @@ case class Box[A](value: A)
 ```
 
 <div class="solution">
-任意の型`A`の値を含む`Box[A]`に対するジェネリックな`Codec`が必要だ。
+任意の型`A`を持つ値を含む`Box[A]`に対する、ジェネリックな`Codec`が必要だ。
 暗黙のパラメータを用いてスコープに入れた`Codec[A]`の`imap`を呼び出すことで、これを作ることができる:
 
 ```tut:book:silent
@@ -315,6 +315,7 @@ decode[Box[Double]]("123.4")
 
 <div class="callout callout-warning">
 **どうしてこんな名前なの?**
+
 「反変」、「非変」、そして「共変」という言葉と、ファンクタの種類との間には、どんな関係があるのだろうか?
 
 [@sec:variance]節を思い出すと、変性(variance)はサブタイピングに影響するものだ。本質的には、サブタイピングとは、コードを破壊することなくある型の値を他の型の値が要求されている場所で利用する能力である。
