@@ -49,3 +49,15 @@
 > For example, we can evaluate `(1 + 2) * 3)` as follows:
 
 - 最後の括弧が余計
+
+## applicatives
+### index
+> l52.
+> The calls to `parseInt` and `Future.apply` above
+
+- 上に`Future.apply`の呼び出しは登場していない。コード例が間違っている?
+
+### validated
+> l250.
+
+- なぜかコメントアウトされている
