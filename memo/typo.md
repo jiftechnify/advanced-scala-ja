@@ -7,6 +7,25 @@
 
 - 3種類と書いてあるが、実際には2種類しか導入されていない。
 
+## monoids
+### index
+> l160.
+> definition of Cats' [`Monoid`][cats.Monoid] is:
+
+- Semigroupの説明なのにMonoidになってる
+
+## functors
+### cats
+> l123.
+> if we have a `Functor` for `expr1` in scope.
+
+- `expr1`は`foo`の間違いと思われる。
+
+> l138.
+> We can define a functor simply by defining its map method.
+
+- `map`がバッククオートで囲まれていないのはおそらくミス
+
 ## monads
 ### index
 > l14.
