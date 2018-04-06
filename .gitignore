@@ -18,3 +18,5 @@ target/
 project/target
 
 original/
+
+templates/template.log

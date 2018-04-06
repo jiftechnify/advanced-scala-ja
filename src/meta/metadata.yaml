@@ -31,51 +31,51 @@ pages:
   - intro/conventions.md
   - intro/contributors.md
   - intro/backers.md
+
+  - parts/part1.md
+
+  - type-classes/index.md
+  - type-classes/anatomy.md
+  - type-classes/implicits.md
+  - type-classes/printable.md
+  - type-classes/cats.md
+  - type-classes/equal.md
+  - type-classes/instance-selection.md
+  - type-classes/summary.md
   #
-  # - parts/part1.md
+  - monoids/index.md
+  - monoids/cats.md
+  - monoids/applications.md
+  - monoids/summary.md
   #
-  # - type-classes/index.md
-  # - type-classes/anatomy.md
-  # - type-classes/implicits.md
-  # - type-classes/printable.md
-  # - type-classes/cats.md
-  # - type-classes/equal.md
-  # - type-classes/instance-selection.md
-  # - type-classes/summary.md
+  - functors/index.md
+  - functors/cats.md
+  - functors/contravariant-invariant.md
+  - functors/contravariant-invariant-cats.md
+  - functors/partial-unification.md
+  - functors/summary.md
   #
-  # - monoids/index.md
-  # - monoids/cats.md
-  # - monoids/applications.md
-  # - monoids/summary.md
+  - monads/index.md
+  - monads/cats.md
+  - monads/id.md
+  - monads/either.md
+  - monads/monad-error.md
+  - monads/eval.md
+  - monads/writer.md
+  - monads/reader.md
+  - monads/state.md
+  - monads/custom-instances.md
+  - monads/summary.md
   #
-  # - functors/index.md
-  # - functors/cats.md
-  # - functors/contravariant-invariant.md
-  # - functors/contravariant-invariant-cats.md
-  # - functors/partial-unification.md
-  # - functors/summary.md
+  - monad-transformers/index.md
+  - monad-transformers/summary.md
   #
-  # - monads/index.md
-  # - monads/cats.md
-  # - monads/id.md
-  # - monads/either.md
-  # - monads/monad-error.md
-  # - monads/eval.md
-  # - monads/writer.md
-  # - monads/reader.md
-  # - monads/state.md
-  # - monads/custom-instances.md
-  # - monads/summary.md
-  #
-  # - monad-transformers/index.md
-  # - monad-transformers/summary.md
-  #
-  # - applicatives/index.md
-  # - applicatives/semigroupal.md
-  # - applicatives/examples.md
-  # - applicatives/validated.md
-  # - applicatives/applicative.md
-  # - applicatives/summary.md
+  - applicatives/index.md
+  - applicatives/semigroupal.md
+  - applicatives/examples.md
+  - applicatives/validated.md
+  - applicatives/applicative.md
+  - applicatives/summary.md
   #
   - foldable-traverse/index.md
   - foldable-traverse/foldable.md
@@ -110,9 +110,9 @@ pages:
   # - case-studies/parser/transforms.md
   # - case-studies/parser/applicative.md
 
-  # - parts/part3.md
-  #
-  # - solutions.md
+  - parts/part3.md
+
+  - solutions.md
   - links.md
   #
   # - parts/part4.md
