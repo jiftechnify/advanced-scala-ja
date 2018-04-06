@@ -70,18 +70,18 @@ List(1, 2, 3).foldRight(List.empty[Int])((i, a) => i :: a)
 ```
 
 型エラーを避けるには、蓄積変数の型をよく考えて指定しなければならないことに注意してほしい。
-蓄積変数の方が`Nil.type`または`List[Nothing]`と推論されるのを避けるため、ここでは`List.empty[Int]`を利用している:
+蓄積変数の型が`Nil.type`または`List[Nothing]`と推論されるのを避けるため、ここでは`List.empty[Int]`を利用している:
 
 ```tut:book:fail
 List(1, 2, 3).foldRight(Nil)(_ :: _)
 ```
 </div>
 
-### 演習: 畳み込みを他のメソッドの足場に
+### 演習: 畳み込みを他のメソッドのための足場として用いる
 
 `foldLeft`と`foldRight`は非常に普遍的なメソッドである。
 これらを利用することで、多くのよく知られた高レベルな順列の演算を実装することができる。
-`List`の`map`、`flatMap`、`filter`、そして`sum`メソッドの代用品を`foldRight`によって実装し、このことを確かめよ。
+`List`の`map`、`flatMap`、`filter`、そして`sum`メソッドの代替品を`foldRight`によって実装し、このことを確かめよ。
 
 <div class="solution">
 解答は以下の通り:
