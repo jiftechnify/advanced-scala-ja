@@ -84,25 +84,25 @@ pages:
   - foldable-traverse/traverse-cats.md
   - foldable-traverse/summary.md
   #
-  # - parts/part2.md
+  - parts/part2.md
   #
-  # - case-studies/testing/index.md
+  - case-studies/testing/index.md
   #
-  # - case-studies/map-reduce/index.md
+  - case-studies/map-reduce/index.md
   #
-  # - case-studies/validation/index.md
-  # - case-studies/validation/sketch.md
-  # - case-studies/validation/check.md
-  # - case-studies/validation/map.md
-  # - case-studies/validation/kleisli.md
-  # - case-studies/validation/conclusions.md
+  - case-studies/validation/index.md
+  - case-studies/validation/sketch.md
+  - case-studies/validation/check.md
+  - case-studies/validation/map.md
+  - case-studies/validation/kleisli.md
+  - case-studies/validation/conclusions.md
   #
-  # - case-studies/crdt/index.md
-  # - case-studies/crdt/eventual-consistency.md
-  # - case-studies/crdt/g-counter.md
-  # - case-studies/crdt/generalisation.md
-  # - case-studies/crdt/abstraction.md
-  # - case-studies/crdt/summary.md
+  - case-studies/crdt/index.md
+  - case-studies/crdt/eventual-consistency.md
+  - case-studies/crdt/g-counter.md
+  - case-studies/crdt/generalisation.md
+  - case-studies/crdt/abstraction.md
+  - case-studies/crdt/summary.md
 
   # - case-studies/parser/index.md
   # - case-studies/parser/intro.md
