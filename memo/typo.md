@@ -25,3 +25,27 @@
 > We can define a functor simply by defining its map method.
 
 - `map`がバッククオートで囲まれていないのはおそらくミス
+
+## monads
+### index
+> l14.
+> This type class is one of the benefits bought to us by Cats.
+
+- "bought"は"brought"のtypoでは?
+
+
+### monad-error
+> l155.
+
+- 演習を作ろうとした形跡があるが、問題文がない
+
+### writer
+> l280.
+
+- `Semigroup`で十分だし本文でも`Semigroup`となっているが、コメントが`for Monoid`
+
+### state
+> l159.
+> For example, we can evaluate `(1 + 2) * 3)` as follows:
+
+- 最後の括弧が余計
