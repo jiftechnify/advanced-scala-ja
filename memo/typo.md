@@ -41,3 +41,10 @@ We can abstract `A => Validated[E, A]` to `A => F[B]`,
 - `BoundedSemiLattice`型クラスは存在するように見える
   + [ソース](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/BoundedSemilattice.scala)
   + ないので自分で作る流れになっている。あることにすれば自作部分はカットすることになる。
+
+#### abstraction
+> l89.
+> to place it in glocal implicit scope:
+
+- glocalはglobalのミスと思われる
+  + glocalという単語は存在するが、文脈的にもglobalが正しそう
