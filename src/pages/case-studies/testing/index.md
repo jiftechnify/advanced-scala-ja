@@ -31,7 +31,7 @@ class UptimeService(client: UptimeClient) {
 ```
 
 `UptimeClient`をトレイトとしてモデル化したのは、ユニットテストの際にそれをスタブにしようと考えているからだ。
-例えば、実際のサーバを呼び集めることなく、ダミーのデータを提供するようなテストクライアントを書くことができる:
+例えば、実際のサーバを呼び出さず、代わりにダミーのデータを提供するようなテストクライアントを書くことができる:
 
 ```tut:book:silent
 class TestUptimeClient(hosts: Map[String, Int]) extends UptimeClient {
@@ -41,7 +41,7 @@ class TestUptimeClient(hosts: Map[String, Int]) extends UptimeClient {
 ```
 
 さて、`UptimeService`に対するユニットテストを書いているとしよう。
-それがどこから稼働時間を取得しているかに関係なく、その合計値を計算する能力をテストしたい。
+実際にどこから稼働時間を取得しているかを考えずに、稼働時間の合計値を計算する機能をテストしたい。
 例えば:
 
 ```tut:book:fail
@@ -65,8 +65,8 @@ def testTotalUptime() = {
 
 この問題を解決するにはいくつかの方法がある。
 非同期性に対応させるために、テストコードを書き換えることもできる。
-しかし、もうひとつの代替案がある。
-修正することなくテストが動作するように、サービスのコードを同期的に変えることにしよう!
+しかし、もうひとつの代替策がある。
+修正することなくテストが動作するように、サービスのコードを同期的なものに変換しよう!
 
 ## 型コンストラクタの抽象化
 
@@ -95,7 +95,7 @@ trait UptimeClient {
 はじめは難しく見えるだろう。
 それぞれの型の`Int`の部分を残しつつ、テストコードでは`Future`の部分を「投げ捨てて」しまいたい。
 幸い、Cats は **恒等型** `Id`という解決策を提供している。これは[@sec:monads:identity]節で見たものだ。
-`Id`は、型の意味を変えることなく、型を型コンストラクタの中に「包む」ことを可能にする:
+`Id`は、型の意味を変えることなく、それを型コンストラクタの中に「包む」ことを可能にする:
 
 ```scala
 package Cats
@@ -133,7 +133,7 @@ trait TestUptimeClient extends UptimeClient[Id] {
 }
 ```
 
-`Id[A]`は`A`の単なる別名なので、`TestUptimeClient`でそれを`Id[Int]`と呼ぶ必要はない、ということに注意してほしい。代わりに、単に`Int`と書ける:
+`Id[A]`は`A`の単なる別名なので、`TestUptimeClient`の中でそれを`Id[Int]`と呼ぶ必要はないということに注意してほしい。代わりに、単に`Int`と書ける:
 
 ```tut:book:silent
 trait TestUptimeClient extends UptimeClient[Id] {
@@ -142,7 +142,7 @@ trait TestUptimeClient extends UptimeClient[Id] {
 ```
 
 もちろん、技術的にいえば`getUptime`を`RealUptimeClient`や`TestUptimeClient`で再宣言する必要はない。
-しかし、すべてを書き下すことは、このテクニックを説明する助けとなる。
+しかし、すべてを書き下すことは、このテクニックを理解する助けとなる。
 </div>
 
 これで、前のように`Map[String, Int]`に基づき、`TestUptimeClient`の定義を具体的に書けるようになったはずだ。
@@ -170,7 +170,7 @@ object wrapper {
 まずメソッドシグネチャから始める:
 
 - `getTotalUptime`の本体をコメントアウトせよ
-  (すべてがコンパイルを通るように`???`に置き換えてもよい)。
+  (すべてがコンパイルを通るように、それを`???`に置き換えよ)。
 
 - `UptimeService`に`F[_]`という型パラメータを追加し、それを`UptimeClient`に渡すようにせよ。
 
@@ -196,7 +196,7 @@ class UptimeService[F[_]](client: UptimeClient[F]) {
 //                              ^
 ```
 
-ここでの問題は`traverse`が`Applicative`値を持つ値の順列の上でしか動作しないことだ。
+ここでの問題は、`traverse`が`Applicative`値を持つ値の順列の上でしか動作しないことだ。
 元々のコードでは`List[Future[Int]]`をトラバースしていた。
 `Future`にはアプリカティブのインスタンスがあるので、正しく動作した。
 今のバージョンでは、`List[F[Int]]`をトラバースすることになる。
@@ -289,12 +289,12 @@ testTotalUptime()
 
 ## まとめ
 
-この事例は、Cats がどのような形で異なる計算シナリオを抽象化する助けとなるかを示している。
+この事例は、Cats を用いてどのように異なる計算シナリオを抽象化すればよいかを示している。
 同期的なコードと非同期的なコードの間で抽象化を行うために、`Applicative`型クラスを利用した。
 関数的な抽象化によって、実装の詳細について考えることなく、行いたい計算の連鎖の種類を指定することが可能となる。
 
 図[@fig:applicative:hierarchy]では、まさにこのような種類の抽象化を行うために作られた、計算を表現する型クラスの「スタック」を示した。
-`Functor`、`Applicative`、`Monad`、そして`Traverse`のような型クラスは、変換、綴じ合わせ、逐次計算、そして反復計算といったパターンの、抽象的な実装を提供する。
+`Functor`、`Applicative`、`Monad`、そして`Traverse`のような型クラスは、変換、綴じ合わせ(zipping)、逐次計算、そして反復計算といったパターンの、抽象的な実装を提供する。
 これらの型の上の数学的な法則が、数々のセマンティクスが協調して動作することを保証する。
 
 この事例で`Applicative`を利用したのは、これが必要とされる最低限の能力を持つ型クラスであったためだ。

@@ -15,17 +15,17 @@ Hadoop を利用したことがあれば、そうでなくとも「ビッグデ�
 ![型チャート: ファンクタの map](src/pages/functors/generic-map.pdf+svg){#fig:map-reduce:functor-type-chart}
 
 `map`は、順列のそれぞれの要素を独立に変換する。
-別々の要素に適用される変換の間に依存性はないので、`map`は簡単に並列化できる(型に反映されていない副作用を利用していないと仮定すれば、`A => B`という関数の型シグネチャがこれを示していることになる)。
+別々の要素に適用される変換の間に依存性はないので、`map`は簡単に並列化できる(型に反映されていない副作用を内部で利用していないと仮定すれば、`A => B`という関数の型シグネチャがこれを示していることになる)。
 
 `fold`についてはどうだろうか?
 `Foldable`のインスタンスによってこのステップを実装できる。
-すべてのファンクタが foldable のインスタンスを併せ持つわけではないが、両両方の型クラスに属する任意のデータ型の上で map-reduce システムを実装できる。
+すべてのファンクタが foldable のインスタンスを併せ持つわけではないが、両方の型クラスに属する任意のデータ型の上で map-reduce システムを実装できる。
 集約のステップは、分配された`map`の結果に対し`foldLeft`を行うというものになる。
 
 ![型チャート: fold](src/pages/foldable-traverse/generic-foldleft.pdf+svg){#fig:map-reduce:foldleft-type-chart}
 
 集約ステップを分配することで、探索の順序の制御を失うことになる。
-すべての要素の集約を左から右に行うとは限らない---いくつかの部分列に対し左から右への集約を行い、それから結果を組み合わせることもできる。
+すべての要素の集約が左から右に行われるとは限らない---いくつかの部分列に対し左から右への集約を行い、それから結果を組み合わせることもできる。
 正しさを保証するには、集約演算が **結合的** でなければならない:
 
 ```scala
@@ -49,7 +49,7 @@ reduce(seed, a1) == reduce(a1, seed) == a1
 
 このパターンは何かに似ていないだろうか?
 そう、本書で最初に見た型クラスである`Monoid`に帰ってきたのだ。
-モノイドの重要性にはじめて気づいたのは我々ではない。
+我々がモノイドの重要性にはじめて気づいた、というわけではない。
 [map-reduce のためのモノイド・デザインパターン][link-map-reduce-monoid]が、Twitter の[Summingbird][link-summingbird]のような、近年のビッグデータシステムの核となっているのだ。
 
 ## *foldMap* を実装する
@@ -154,15 +154,15 @@ def foldMap[A, B: Monoid](as: Vector[A])(func: A => B): B =
 
 ![*parallelFoldMap* のアルゴリズム](src/pages/case-studies/map-reduce/parallel-fold-map.pdf+svg){#fig:map-reduce:parallel-fold-map}
 
-Sacla は、複数のスレッドに仕事を分配するのに使える、いくつかの簡単なツールを提供している。
-実装に[並列コレクションライブラリ][link-parallel-collections]を使うこともできるが、もっと深く分割し、`Future`を利用してアルゴリズムを自分で実装することに挑戦してみよう。
+Scala は、複数のスレッドに仕事を分配するのに利用できる、いくつかの簡単なツールを提供している。
+実装に[並列コレクションライブラリ][link-parallel-collections]を使うこともできるが、もっと深入りし、`Future`を利用してアルゴリズムを自分で実装することに挑戦してみよう。
 
 ### *Future* 、スレッドプール、実行コンテキスト(ExecutionContext)
 
 我々は、既に`Future`のモナド的な性質についてよく知っている。
 簡単な復習のため、また Scala の future が裏側でどのようにスケジュールされているのかを説明するために、少し紙面を割くことにする。
 
-`Future`は、暗黙の`ExecutionContext`型の引数によって決められたスレッドプールで実行される。
+`Future`は、暗黙の`ExecutionContext`型の引数によって定められたスレッドプール上で実行される。
 `Future`を生成するときはいつでも(`Future.apply`またはその他のコンビネータを利用する場合も)、スコープ内に暗黙の`ExecutionContext`を持っている必要がある:
 
 ```tut:book:silent
@@ -258,7 +258,7 @@ Runtime.getRuntime.availableProcessors
 
 ### *parallelFoldMap* を実装する
 
-`parallelFoldMap`という名前で、`foldMap`の並列バージョンを実装せよ。
+`parallelFoldMap`という名前の、`foldMap`の並列バージョンを実装せよ。
 型シグネチャは次の通り:
 
 ```tut:book:silent
@@ -268,10 +268,13 @@ def parallelFoldMap[A, B : Monoid]
 ```
 
 上で説明したテクニックを利用して、仕事を 1つの CPU あたり1つのバッチに分割せよ。
-各バッチを並列するスレッドで処理せよ。
+各バッチを並列に動作するスレッドで処理せよ。
 全体のアルゴリズムを確認するのに必要なら、図[@fig:map-reduce:parallel-fold-map]を見返すとよい。
 
 ボーナス問題として、上で実装した`foldMap`を利用して各 CPU でバッチを処理しするように変更してみよ。
+
+<div class="solution">
+`map`と`fold`のそれぞれを分けて書いた、注釈付きの解答を以下に示す:
 
 ```tut:book:silent
 import scala.concurrent.duration.Duration
@@ -413,7 +416,7 @@ Cats が理解できる形にデータを変換するために、`toVector`の�
 単純に`Functor`を利用して変換し、`Monoid`を利用して集約するだけでいい。
 
 バッチ処理の戦略にかかわらず、`Monoid`を利用した変換と集約は、加算や文字列の連結のような単純な仕事に限定されない、強力で普遍的なフレームワークである。
-毎日の分析においてデータサイエンティストが行うほとんどの仕事は、モノイドにキャストできる。
+データサイエンティストが日常的な分析において行うほとんどの仕事は、モノイドにキャストできる。
 次のものはすべてモノイドだ:
 
 - ブルームフィルタのような近似的集合

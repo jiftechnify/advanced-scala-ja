@@ -20,6 +20,13 @@
 
 - `match`とは? batchの間違いと解釈して訳しておく
 
+### validation
+#### kleisli
+> l11.
+We can abstract `A => Validated[E, A]` to `A => F[B]`,
+
+- 左辺は`A => Validated[E, B]`の間違いだと思われる
+
 ### crdt
 #### generalisation
 > l83.

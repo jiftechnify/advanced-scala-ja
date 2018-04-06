@@ -1,10 +1,10 @@
 ## クライスリ
 
-`Check`の実装を整理して、この事例研究を終わりにする。
+`Check`の実装を整理して、この事例研究の締めくくりとする。
 我々の方針に対する正当な批判として、少しのことをするのにたくさんのコードを書かなければならないというものがある。
 `Predicate`は実質`A => Validated[E, A]`型の関数で、`Check`は基本的にはこれらの関数を合成できるようにするラッパーでしかない。
 
-`A => Validated[E, A]`を`A => F[B]`という形に抽象化することができる。これが、モナドの`flatMap`メソッドに渡す関数の型だということに気づいたかもしれない。
+`A => Validated[E, B]`を`A => F[B]`という形に抽象化することができる。これが、モナドの`flatMap`メソッドに渡す関数の型だということに気づいたかもしれない。
 次のような一連の操作があると想像してみよう:
 
 - (例えば、`pure`を用いて)ある値をモナドに持ち上げる。
@@ -12,7 +12,7 @@
 
 - モナドの上で、`flatMap`を利用していくつかの変換を逐次的に行う。
 
-これは、図[@sec:validation:kleisli]のように表すことができる。
+これは、図[@fig:validation:kleisli]のように表すことができる。
 この例を、モナドの API を利用して次のように書き下すこともできる:
 
 ```scala
@@ -23,7 +23,7 @@ def example[A, C](a: A): F[C] =
   aToB(a).flatMap(bToc)
 ```
 
-![モナド的変換の連鎖](src/pages/case-studies/validation/kleisli.pdf+svg){#sec:validation:kleisli}
+![モナド的変換の連鎖](src/pages/case-studies/validation/kleisli.pdf+svg){#fig:validation:kleisli}
 
 抽象的にいえば、`Check`は`A => F[B]`型の関数を合成することを可能にするものだということを思い出してほしい。
 上の例を`andThen`を利用して書くことができる:
@@ -32,7 +32,7 @@ def example[A, C](a: A): F[C] =
 val aToC = aToB andThen bToC
 ```
 
-結果は、`A`型の値に次々に適用できる、`A => F[C]`という型を持つ(ラップされた)関数`aToC`である。
+結果は、`A`型の値に関数を次々に適用する、`A => F[C]`という型を持つ(ラップされた)関数`aToC`である。
 
 `example`メソッドのように`A`型の引数を参照することなく、同じことを成し遂げたのだ。
 `Check`の`andThen`メソッドは関数合成のようなものだが、`A => B`ではなく`A => F[B]`型の関数を合成する。
@@ -45,7 +45,7 @@ Cats は、`Check`がやっているのと同じように関数を包む[`cats.d
 あなたは本書の前の方で出てきた別の概念の変装を見破ることに成功した:
 `Kleisli`は`ReaderT`の単なる別名なのだ。
 
-3ステップで整数を整数のリストに変換するのに`Kleisli`を利用した簡単な例を挙げる:
+`Kleisli`を利用して、3ステップで整数を整数のリストに変換する簡単な例を挙げる:
 
 ```tut:book:silent
 import cats.data.Kleisli
@@ -81,7 +81,7 @@ pipeline.run(20)
 
 妥当性検査の例の`Check`を`Kleisli`で置き換えてみよう。
 そのためには`Predicate`にいくつかの変更を行う必要がある。
-`Kleisli`はしか扱うことができないので、`Predicate`を関数に変換できるようにしなければならない。
+`Kleisli`は関数しか扱えないので、`Predicate`を関数に変換できるようにしなければならない。
 また、細かいことだが、`Predicate`を関数に変換する際は、`A => Validated[E, A]`ではなく`A => Either[E, A]`型の関数を返す必要がある。これは`Kleisli`がモナドを返す関数に依存するためだ。
 
 
@@ -111,9 +111,9 @@ sealed trait Predicate[E, A] {
 </div>
 
 これで、ユーザ名とEメールアドレスの妥当性検査の例を`Kleisli`と`Predicate`を利用して書き換えることができる。
-詰まったときのために、いくつかヒントを与えよう:
+行き詰まったときのために、いくつかヒントを与えよう:
 
-まず、`Predicate`の`rum`メソッドは暗黙の引数をとることを思い出そう。
+まず、`Predicate`の`run`メソッドは暗黙の引数をとることを思い出そう。
 `aPredicate.run(a)`という呼び出しを行うと、暗黙の引数を明示的に渡すことになる。
 `Predicate`から関数を生成してすぐに適用したければ、`aPredicate.run.apply(a)`と書こう。
 
@@ -199,7 +199,7 @@ object wrapper {
 ```
 
 このコードを書く際に型推論の限界に対処するのは、非常にもどかしいことだろう。
-`Predicate`と関数、`Validated`と`Either`をいつ変換すればいいか理解できれば物事は単純になるが、そのプロセスはやはり複雑になる:
+`Predicate`と関数、`Validated`と`Either`をいつ変換すればいいのかを理解できれば物事は単純になるが、そのプロセスはやはり複雑になる:
 
 ```tut:book:silent
 import cats.data.{Kleisli, NonEmptyList, Validated}

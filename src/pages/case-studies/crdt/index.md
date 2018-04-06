@@ -1,6 +1,6 @@
 # 事例: CRDT
 
-この事例では、結果整合的(evantually consistent)なデータの調停(reconcile)が可能なデータ構造の集まりである、*Commutative Replicated Data Type* (可換複製可能データ型)を詳しく見ていく。
+この事例では、結果整合的(evantually consistent)なデータの調停(reconcile)が可能な一連のデータ構造、*Commutative Replicated Data Type* (可換複製可能データ型)について詳しく見ていく。
 
 
 まず、結果整合的なシステムの有益性と難しさについて説明する。次に、モノイドやそれを拡張したものによって、生じる問題をいかにして解決するかを示す。

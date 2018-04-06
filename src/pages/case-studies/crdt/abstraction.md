@@ -9,8 +9,8 @@
 これにより、例えば、データの耐久性よりも性能を重視したくなった際に、永続的記憶装置をインメモリの記憶装置にシームレスに置き換えることができるようになる。
 
 これを実装する方法はいくつかある。
-1つの方針は、`CommutativeMonoid`と`BoundedSemiLattice`に依存する`GCounter`型クラスを定義するというものだ。
-マップの抽象におけるキーと値の型を表現する **2つの** 型パラメータを持つ型コンストラクタを受け取るような型クラスを定義することになる。
+ひとつの方針は、`CommutativeMonoid`と`BoundedSemiLattice`に依存する`GCounter`型クラスを定義するというものだ。
+マップの抽象におけるキーと値の型を表現する、 **2つの** 型パラメータを持つ型コンストラクタを受け取るような型クラスを定義することになる。
 
 ```tut:book:invisible
 import scala.language.higherKinds
@@ -70,7 +70,7 @@ object wrapper {
 
 <div class="solution">
 このインスタンスの完全なコードを以下に示す。
-これをグローカルな暗黙スコープに配置するには、この定義を`GCounter`のコンパニオンオブジェクトの中に書くとよい:
+これをグローバルな暗黙スコープに配置するには、この定義を`GCounter`のコンパニオンオブジェクトの中に書くとよい:
 
 ```tut:book:silent
 import cats.instances.list._   // for Monoid
@@ -118,7 +118,7 @@ val total  = counter.total(merged)
 
 ## キー・バリューストアの抽象化
 
-1つの解決策は、キー・バリューストアの考え方を型クラスという形で捉え、`KeyValueStore`のインスタンスを持つような任意の型に対する`GCounter`インスタンスを生成するというものだ。
+ひとつの解決策は、キー・バリューストアの考え方を型クラスという形で捉え、`KeyValueStore`のインスタンスを持つような任意の型に対する`GCounter`インスタンスを生成するというものだ。
 そのような型クラスのコードは以下のようになる:
 
 ```tut:book:silent
@@ -200,5 +200,5 @@ implicit def gcounterInstance[F[_,_], K, V]
   }
 ```
 
-この事例の完全なコードはかなり長いものとなったが、その多くは型クラス上の演算の構文を定めるボイラープレートである。
+この事例の完全なコードはかなり長いものとなったが、その多くは型クラス上の演算の構文を定めるためのボイラープレートである。
 [Simulacrum][link-simulacrum]や[Kind Projector][link-kind-projector]のようなコンパイラプラグインを利用することで、これを削減できる。
