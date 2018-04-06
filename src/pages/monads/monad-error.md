@@ -51,7 +51,7 @@ val monadError = MonadError[ErrorOr, String]
 <div class="callout callout-warning">
 **ApplicativeErrorについて**
 
-実際には、`MonadError`は`ApplicativeError`と呼ばれるもうひとつの型クラスを継承している。
+実際には、`MonadError`は`ApplicativeError`と呼ばれる他の型クラスを継承している。
 しかし、[@sec:applicatives]章になるまで`Applicative`に出会うことはない。
 これらの型クラスが持つ意味は同様なので、今はこの詳細を無視してかまわない。
 </div>

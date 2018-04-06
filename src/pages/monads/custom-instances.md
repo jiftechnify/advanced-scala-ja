@@ -101,7 +101,7 @@ implicit val treeMonad = new Monad[Tree] {
 ```
 
 以上の解答はこの演習に対する完全に正しい解答である。
-ただひとつの欠点は、Cats がスタック安全性を保証できないことだ。
+唯一の欠点は、Cats がスタック安全性を保証できないことだ。
 
 末尾再帰の解答を書くのはもっと難しい。
 この解答は Nazarii Bardiuk による[この Stack Overflow の投稿][link-so-tree-tailrecm]を修正したものである。
