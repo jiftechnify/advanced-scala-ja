@@ -42,19 +42,19 @@ pages:
   - type-classes/equal.md
   - type-classes/instance-selection.md
   - type-classes/summary.md
-  #
+
   - monoids/index.md
   - monoids/cats.md
   - monoids/applications.md
   - monoids/summary.md
-  #
+
   - functors/index.md
   - functors/cats.md
   - functors/contravariant-invariant.md
   - functors/contravariant-invariant-cats.md
   - functors/partial-unification.md
   - functors/summary.md
-  #
+
   - monads/index.md
   - monads/cats.md
   - monads/id.md
@@ -66,37 +66,37 @@ pages:
   - monads/state.md
   - monads/custom-instances.md
   - monads/summary.md
-  #
+
   - monad-transformers/index.md
   - monad-transformers/summary.md
-  #
+
   - applicatives/index.md
   - applicatives/semigroupal.md
   - applicatives/examples.md
   - applicatives/validated.md
   - applicatives/applicative.md
   - applicatives/summary.md
-  #
+
   - foldable-traverse/index.md
   - foldable-traverse/foldable.md
   - foldable-traverse/foldable-cats.md
   - foldable-traverse/traverse.md
   - foldable-traverse/traverse-cats.md
   - foldable-traverse/summary.md
-  #
+
   - parts/part2.md
-  #
+
   - case-studies/testing/index.md
-  #
+
   - case-studies/map-reduce/index.md
-  #
+
   - case-studies/validation/index.md
   - case-studies/validation/sketch.md
   - case-studies/validation/check.md
   - case-studies/validation/map.md
   - case-studies/validation/kleisli.md
   - case-studies/validation/conclusions.md
-  #
+
   - case-studies/crdt/index.md
   - case-studies/crdt/eventual-consistency.md
   - case-studies/crdt/g-counter.md
@@ -114,6 +114,6 @@ pages:
 
   - solutions.md
   - links.md
-  #
-  # - parts/part4.md
+  
+  - parts/part4.md
 ...
