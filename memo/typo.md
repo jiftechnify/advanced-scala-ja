@@ -61,3 +61,10 @@
 > l250.
 
 - なぜかコメントアウトされている
+
+## foldable-traverse
+### traverse
+> l80.
+
+- foldLeftの第1引数の型が違う
+  + Future(List.empty[A]) -> Future(List.empty[B])
