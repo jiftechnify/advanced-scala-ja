@@ -44,7 +44,7 @@ trait Applicative[F[_]] extends Apply[F] {
 
 ![モナド型クラスの階層](src/pages/applicatives/hierarchy.png){#fig:applicatives:hierarchy}
 
-[^cats-infographic]: 完全な階層図については [Rob Norris のインフォグラフィック][link-cats-infographic]を参照のこと。
+[^cats-infographic]: 完全な階層図については [Rob Norris によるインフォグラフィック][link-cats-infographic]を参照のこと。
 
 階層内のそれぞれの型クラスが、特定の計算の連鎖のセマンティクスを表現している。それぞれが特有のメソッドを導入し、それによってスーパー型の機能を定義している:
 
@@ -56,7 +56,7 @@ trait Applicative[F[_]] extends Apply[F] {
 `Apply`は`ap`と`map`を使って`product`を定義し、
 `Monad`は`pure`と`flatMap`を使って`product`、`ap`、そして`map`を定義している。
 
-このことを説明するために、仮説的な2つのデータ型を考えてみよう:
+このことを説明するために、2つの仮のデータ型を考えてみよう:
 
 - `Foo`はモナドである。
   これは`pure`と`flatMap`を実装し、`product`、`map`、`ap`の標準的な定義を継承するような`Monad`型クラスのインスタンスを持つ。
@@ -64,7 +64,7 @@ trait Applicative[F[_]] extends Apply[F] {
 - `Bar`はアプリカティブファンクタである。
   これは`pure`と`ap`を実装し、`product`と`map`の標準的な定義を継承するような`Applicative`のインスタンスを持つ。
 
-これ以上の実装の詳細を知らなくても、これらの2つのデータ型について何かいえることはあるだろうか?
+これ以上の実装の詳細を知らないままで、これらの2つのデータ型について何かいえることはあるだろうか?
 
 `Foo`については`Bar`よりも厳密に多くのことが分かる:
 `Monad`は`Applicative`のサブ型なので、`Bar`が保証しないような`Foo`の特性(即ち`flatMap`)を持つことを保証できる。
@@ -81,8 +81,8 @@ trait Applicative[F[_]] extends Apply[F] {
 
 モナドが、モデル化する計算に厳格な **逐次的** 振る舞いを強いるのに対し、
 アプリカティブや Semigroupal がそのような制限を課すことはない。
-これは、この階層における別の最適解である。
-これらを用いて、モナドが表現できない並行・独立な計算を表現することができる。
+これは、この型クラス階層における別の最適解である。
+これらを用いて、モナドが表現できない並列で独立な計算を表現することができる。
 
 データ構造の選択はセマンティクスの選択である。
 モナドを選べば、厳密な逐次的セマンティクスを強いられる。

@@ -19,7 +19,7 @@ trait Semigroupal[F[_]] {
 
 ### 2つの文脈を結合する
 
-`Semigroup`は値を結合することを可能にする一方で、`Semigroupal`は文脈を結合することを可能にする。
+`Semigroup`が値を結合することを可能にする一方で、`Semigroupal`は文脈を結合することを可能にする。
 例として、いくつかの`Option`を結合してみよう:
 
 ```tut:book:silent
@@ -41,8 +41,8 @@ Semigroupal[Option].product(Some(123), None)
 
 ### 3つ以上の文脈を結合する
 
-`Semigroupal`のコンパニオンオブジェクトには`product`の上で定義されたメソッドの集まりがある。
-例えば、`tuple2`から`tuple22`までのメソッドは、異なる引数の数を持つ`product`の一般形である:
+`Semigroupal`のコンパニオンオブジェクトには`product`の上に定義されたメソッドの集まりがある。
+例えば、`tuple2`から`tuple22`までのメソッドは、異なる数の引数を持つ`product`の一般形である:
 
 ```tut:book:silent
 import cats.instances.option._ // for Semigroupal
@@ -53,7 +53,7 @@ Semigroupal.tuple3(Option(1), Option(2), Option(3))
 Semigroupal.tuple3(Option(1), Option(2), Option.empty[Int])
 ```
 
-`map2`から`map22`までのメソッドは、ユーザが指定した関数を2つから22個までの文脈の中にある値に適用する:
+`map2`から`map22`までのメソッドは、ユーザが指定した関数を、2つから22個までの文脈の中にある値に適用する:
 
 ```tut:book
 Semigroupal.map3(Option(1), Option(2), Option(3))(_ + _ + _)
@@ -121,7 +121,7 @@ val add: (Int, Int) => Int = (a, b) => a + b
 
 ### 珍種の関手と Apply 構文
 
-Apply 構文は、[Contravariant][#contravariant]または[Invariant][#invariant]を受け取る`contramapN`や`imapN`メソッドも持っている。
+Apply 構文は、[Contravariant](#contravariant)または[Invariant](#invariant)を受け取る`contramapN`や`imapN`メソッドも持っている。
 例えば、`Invariant`を用いて複数の`Monoid`を合成することができる。
 これは次のようになる:
 

@@ -37,14 +37,14 @@ val v = Validated.Valid(123)
 val i = Validated.Invalid(List("Badness"))
 ```
 
-しかし、返り値の型を`Validated`に広げた`valid`と`invalid`というスマートコンストラクタを利用したほうがより簡単である:
+しかし、返り値の型を`Validated`に広げた、`valid`と`invalid`というスマートコンストラクタを利用したほうがより簡単である:
 
 ```tut:book
 val v = Validated.valid[List[String], Int](123)
 val i = Validated.invalid[List[String], Int](List("Badness"))
 ```
 
-3つ目の選択肢として、`cats.syntax.validated`から`valid`・`invalid`拡張メソッドをインポートすることができる:
+3つ目の選択肢として、`cats.syntax.validated`から`valid`、`invalid`拡張メソッドをインポートすることができる:
 
 ```tut:book:silent
 import cats.syntax.validated._ // for valid and invalid
@@ -55,7 +55,7 @@ import cats.syntax.validated._ // for valid and invalid
 List("Badness").invalid[Int]
 ```
 
-4つ目の選択肢は、それぞれ[`cats.syntax.applicative`][cats.syntax.applicative]と[`cats.syntax.applicativeError`][cats.syntax.applicativeError]にある。`pure`・`raiseError`を使うというものだ:
+4つ目の選択肢は、それぞれ[`cats.syntax.applicative`][cats.syntax.applicative]と[`cats.syntax.applicativeError`][cats.syntax.applicativeError]にある、`pure`と`raiseError`を使うというものだ:
 
 ```tut:book:silent
 import cats.syntax.applicative._      // for pure
@@ -69,7 +69,7 @@ type ErrorsOr[A] = Validated[List[String], A]
 List("Badness").raiseError[ErrorsOr, Int]
 ```
 
-最後に、別の値から`Validated`のインスタンスを生成するヘルパーメソッドもある。
+最後に、別の型の値から`Validated`のインスタンスを生成するヘルパーメソッドもある。
 `Exception`、`Try`、`Either`、そして`Option`のインスタンスから`Validated`を生成できる:
 
 ```tut:book
@@ -86,7 +86,7 @@ Validated.fromOption[String, Int](None, "Badness")
 
 ### Validated のインスタンスの合成
 
-ここまでに説明した、任意の`Semigroupal`のメソッドや構文を用いて、`Validated`のインスタンスを合成することができる。
+ここまでに説明した、すべての`Semigroupal`のメソッドや構文を用いて、`Validated`のインスタンスを合成することができる。
 
 これらのすべてを用いるには、`Semigroupal`のインスタンスがスコープ内になければならない。
 `Either`の場合と同様に、エラーの型を固定して、正しい数の型パラメータを持つ`Semigroupal`のための型コンストラクタを作る必要がある:
@@ -96,7 +96,7 @@ type AllErrorsOr[A] = Validated[String, A]
 ```
 
 `Validated`は`Semigroup`を用いてエラーを蓄積するので、`Semigroupal`のインスタンスを召喚するには`Semigroup`のインスタンスがスコープの中になければならない。
-呼び出し地点において、見える`Semigroup`がなければ、いらいらするほど役に立たないコンパイルエラーが発生する:
+呼び出し地点において、見つけることのできる`Semigroup`がなければ、苛立たしい気持ちになるほど役に立たないコンパイルエラーが発生する:
 
 ```tut:book:fail
 Semigroupal[AllErrorsOr]
@@ -139,7 +139,7 @@ import cats.instances.vector._ // for Semigroupal
 ).tupled
 ```
 
-`cats.data`パッケージは、1つもエラー出さずに失敗することがないよう、[`NonEmptyList`][cats.data.NonEmptyList]と[`NonEmptyVector`][cats.data.NonEmptyVector]という型も提供している:
+`cats.data`パッケージは、1つもエラーを出さずに失敗することがないという状況を表現するための、[`NonEmptyList`][cats.data.NonEmptyList]と[`NonEmptyVector`][cats.data.NonEmptyVector]という型も提供している:
 
 ```tut:book:silent
 import cats.data.NonEmptyVector
@@ -222,9 +222,9 @@ case class User(name: String, age: Int)
 すべてのルールを通過した場合は`User`を返すようにする。
 どれかのルールが満たされていない場合はエラーメッセージの`List`を返すようにすること。
 
-この例を実装するには、ルールを逐次的にも、並行的にも組み合わせる必要がある。
+この例を実装するには、ルールを逐次的にも、並列にも組み合わせる必要がある。
 `Either`を用い、フェイルファストなセマンティクスで計算を逐次的に合成し、
-`Validated`を用い、エラーを蓄積するセマンティクスで計算を並行に合成する。
+`Validated`を用い、エラーを蓄積するセマンティクスで計算を並列に合成する。
 
 まず逐次的な合成からはじめよう。
 `"name"`と`"age"`の2つのフィールドを読み取る2つのメソッドを定義する:
@@ -345,7 +345,7 @@ def readAge(data: FormData): FailFast[Int] =
     flatMap(nonNegative("age"))
 ```
 
-この2つのルールは、これまで見てきたすべてのエラーを拾いだす:
+この2つのルールは、これまで見てきたすべてのエラーを拾い上げる:
 
 ```tut:book
 readName(Map("name" -> "Dade Murphy"))
