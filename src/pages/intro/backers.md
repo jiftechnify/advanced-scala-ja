@@ -1,9 +1,10 @@
 ### 後援者 {-}
 
 オープンソースで公開される以前に本書を購入いただき、本書の執筆を支援してくれた皆様に対しても、深く感謝したい。
-この本は、あなた方がいなければ書き上がることはなかったかもしれない:
+この本は、あなた方がいなければ書き上がることはなかっただろう:
 
 <!-- コンマ、ピリオド、"and"を句読点と「そして」に変える?  -->
+<!-- とりあえず and は消した -->
 
 A battle-hardened technologist,
 Aaron Pritzlaff,
@@ -175,4 +176,4 @@ Wojciech Langiewicz,
 Yann Ollivier (&commat;ya2o),
 Yoshiro Naito,
 zero323,
-and zeronone.
+zeronone.
