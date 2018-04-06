@@ -37,7 +37,7 @@ Writer(Vector(
 `WriterT`は **モナド変換子** と呼ばれる新しい概念の一例である。これについては次章で取り上げる。
 
 今はこの詳細を気にしないことにしよう。
-`Writer`は`WriterT`の型エイリアスなので、`WriterT[Id, W, A]`を`Writer[W, A]`のように読むことができる:
+`Writer`は`WriterT`の型エイリアスなので、`WriterT[Id, W, A]`を`Writer[W, A]`と読み替えることができる:
 
 ```scala
 type Writer[W, A] = WriterT[Id, W, A]
@@ -45,7 +45,7 @@ type Writer[W, A] = WriterT[Id, W, A]
 
 便宜のために、Cats はログのみまたは結果のみを指定して `Writer`を生成する方法を提供している。
 結果だけがある場合、標準的な`pure`構文を利用できる。
-これを利用するには、Cats に空のログを生成する方法を知らせるためにスコープ内に`Monoid[W]`を持っている必要がある:
+これを利用するには、Cats に空のログを生成する方法を知らせるために、スコープ内に`Monoid[W]`を持っている必要がある:
 
 ```tut:book:silent
 import cats.instances.vector._   // for Monoid
@@ -58,7 +58,7 @@ type Logged[A] = Writer[Vector[String], A]
 123.pure[Logged]
 ```
 
-記録したいログだけがあり、結果がない場合は[`cats.syntax.writer`][cats.syntax.writer]にある`tell`構文を利用して`Writer[Unit]`を作ることができる:
+記録したいログだけがあり、結果がない場合は、[`cats.syntax.writer`][cats.syntax.writer]にある`tell`構文を利用して`Writer[Unit]`を作ることができる:
 
 ```tut:book:silent
 import cats.syntax.writer._ // for tell

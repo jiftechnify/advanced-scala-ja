@@ -28,11 +28,11 @@ val optionMonad = new Monad[Option] {
 ```
 
 `tailRecM`メソッドは Cats が `flatMap`のネストした呼び出しで消費するスタック空間の量を節約するために用いる最適化である。
-このテクニックは、PureScriptの作者である Phil Freeman の[2015年の論文][link-phil-freeman-tailrecm]に由来する。
+このテクニックは、PureScript の作者である Phil Freeman の[2015年の論文][link-phil-freeman-tailrecm]に由来する。
 このメソッドは、`fn`が`Right`値を返すまで自身を再帰的に呼び出すようにする必要がある。
 
 `tailRecM`を末尾再帰にすることができるならば、Cats は巨大なリストの畳み込み([@sec:foldable]節を参照)のような再帰を多用する状況で、スタック安全性を保証できる。
-`tailRecM`を末尾再帰にできないならば、Cats はスタック安全性保証できず、極端な場合`StackOverflowError`という結果に終わる。
+`tailRecM`を末尾再帰にできないならば、Cats はスタック安全性を保証できず、極端な場合`StackOverflowError`という結果に終わる。
 Cats におけるすべての組み込みのモナドは、末尾再帰的な`tailRecM`の実装を持つが、独自のモナドに対し`tailRecM`を書くのは、これから見ていくように難しいこともある...
 
 ### 演習: モナドでもっと分岐

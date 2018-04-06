@@ -80,7 +80,7 @@ monadError.handleError(failure) {
 ```
 
 3番目に便利な`ensure`メソッドは、`filter`のような振る舞いを実装している。
-これは、成功を表すモナド値を条件を表す関数によって検査し、その条件関数が`false`を返したときに指定したエラーを送出することができる:
+これは、成功を表すモナド値を条件を表す関数によって検査し、その条件関数が`false`を返す場合に、指定したエラーを送出することができる:
 
 ```tut:book:silent
 import cats.syntax.either._ // for asRight
