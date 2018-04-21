@@ -20,4 +20,4 @@
 このアプローチについては、本書の後半にある[Map-reduce](#map-reduce)の事例でより詳しく見ていく。
 
 `Contravariant`や`Invariant`型クラスは、`Functor`に比べると適用できる範囲が狭い。それでも、変換処理を表現するデータ型を構築するのに役立っている。
-[@sec:applicative]章で[`Semigroupal`](#semigroupal)型クラスについて考える際に、これらを再び取り上げる。
+[@sec:applicatives]章で[`Semigroupal`](#semigroupal)型クラスについて考える際に、これらを再び取り上げる。
