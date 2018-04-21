@@ -52,15 +52,33 @@ $endif$
   \fi
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
   \newcommand{\euro}{€}
+
+% to support CJK characters!
+\usepackage{xeCJK}
+
 $if(mainfont)$
     \setmainfont$mainfont$
 $else$
     \setmainfont[%
       Color=primary,
+      Path=$lib-dir$/fonts/Lato/,
+      BoldItalicFont=Lato-BlackItalic,
+      BoldFont=Lato-Bold,
+      ItalicFont=Lato-Italic]{Lato-Regular}
+$endif$
+
+$if(CJKmainfont)$
+    \setCJKmainfont{$CJKmainfont$}
+$else$
+    \setCJKmainfont[
+      Color=primary,
       Path=$lib-dir$/fonts/Noto/,
-      BoldItalicFont=NotoSansCJK-Bold,
+      AutoFakeSlant=0.2,
       BoldFont=NotoSansCJK-Bold,
-      ItalicFont=NotoSansCJK-Regular]{NotoSansCJK-Regular}
+      ItalicFont=NotoSansCJK-Regular,
+      BoldItalicFont=NotoSansCJK-Bold,
+      ItalicFeatures={FakeSlant=0.2},
+      BoldItalicFeatures={FakeSlant=0.2}]{NotoSansCJK-Regular}
 $endif$
 
 $if(sansfont)$
@@ -68,16 +86,43 @@ $if(sansfont)$
 $else$
     \setsansfont[%
       Color=primary,
+      Path=$lib-dir$/fonts/Lato/,
+      BoldItalicFont=Lato-BlackItalic,
+      BoldFont=Lato-Bold,
+      ItalicFont=Lato-Italic]{Lato-Regular}
+$endif$
+
+$if(CJKsansfont)$
+    \setCJKsansfont{$CJKsansfont$}
+$else$
+    \setCJKsansfont[
+      Color=primary,
       Path=$lib-dir$/fonts/Noto/,
-      BoldItalicFont=NotoSansCJK-Bold,
+      AutoFakeSlant=0.2,
       BoldFont=NotoSansCJK-Bold,
-      ItalicFont=NotoSansCJK-Regular]{NotoSansCJK-Regular}
+      ItalicFont=NotoSansCJK-Regular,
+      BoldItalicFont=NotoSansCJK-Bold,
+      ItalicFeatures={FakeSlant=0.2},
+      BoldItalicFeatures={FakeSlant=0.2}]{NotoSansCJK-Regular}
 $endif$
 
 $if(monofont)$
     \setmonofont[Mapping=tex-ansi]{$monofont$}
 $else$
     \setmonofont[Mapping=tex-ansi]{Bitstream Vera Sans Mono}
+$endif$
+
+$if(CJKmonofont)$
+    \setCJKmonofont{$CJKmonofont$}
+$else$
+    \setCJKmonofont[
+      Path=$lib-dir$/fonts/Noto/,
+      AutoFakeSlant=0.2,
+      BoldFont=NotoSansCJK-Bold,
+      ItalicFont=NotoSansCJK-Regular,
+      BoldItalicFont=NotoSansCJK-Bold,
+      ItalicFeatures={FakeSlant=0.2},
+      BoldItalicFeatures={FakeSlant=0.2}]{NotoSansCJK-Regular}
 $endif$
 
 $if(mathfont)$
@@ -135,11 +180,11 @@ $if(graphics)$
 \makeatletter
 
 % commented out to prevent typeset error
-% \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-% \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 
-\def\maxwidth{5pt}
-\def\maxheight{5pt}
+% \def\maxwidth{5pt}
+% \def\maxheight{5pt}
 \makeatother
 $endif$
 \ifxetex
@@ -400,7 +445,7 @@ $endif$
 % using explicit options in \includegraphics[width, height, ...]{}
 
 % commented out to prevent typeset error
-% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
 % Include-before hook ---------------------------
 

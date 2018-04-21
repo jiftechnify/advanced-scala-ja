@@ -3,9 +3,9 @@ papersize: "a5paper"
 fontsize: "11pt"
 geometry: "margin=.75in"
 solutions:
-  chapterHeadingTemplate: "$title の演習問題の解答"
+  chapterHeadingTemplate: "$title"
   chapterHeadingLevel: 1
-  solutionHeadingTemplate: "$title $part"
+  solutionHeadingTemplate: "$title $part の解答"
   solutionHeadingLevel: 2
 # Uncomment BOTH of these lines to build a PDF for Lulu:
 # "blackandwhiteprintable": true

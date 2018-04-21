@@ -10,11 +10,13 @@
     "textlint-rule-preset-ja-technical-writing": "^2.0.0",
     "textlint-rule-preset-japanese": "^4.0.0",
     "uglifyify": "2.6.0",
-    "underscore": "1.7.0",
-    "underscore-ebook-template": "git+https://github.com/underscoreio/underscore-ebook-template.git#0.6.2"
+    "underscore": "1.7.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specificed\" && exit 1"
   },
-  "author": "Noel Welsh and Dave Gurnell"
+  "author": "Noel Welsh and Dave Gurnell",
+  "dependencies": {
+    "underscore-ebook-template-ja": "^0.1.1"
+  }
 }
